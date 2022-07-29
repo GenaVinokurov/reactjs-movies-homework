@@ -12,4 +12,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version}}
-      - run: npm install
+      - name: install modules
+        run: npm install
+      - name: build project
+        run: npm run build
