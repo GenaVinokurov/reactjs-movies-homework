@@ -16,3 +16,9 @@ jobs:
         run: npm install
       - name: build project
         run: npm run build
+      - name: build storybook
+        run: npm run build-storybook
+      - name: unit test
+        run: npm run test
+      - name: lint code
+        run: npm run lint
