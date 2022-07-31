@@ -1,9 +1,9 @@
 import React from 'react';
-import './App.css';
+import './App.scss';
 
 function App() {
   return (
-    <div className="App" data-testid="app">
+    <div className="app" data-testid="app">
       EPAM
     </div>
   );
