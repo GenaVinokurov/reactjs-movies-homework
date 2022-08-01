@@ -3,4 +3,4 @@
 
 npm run lint
 npm run stylelint
-npm run test
+npm run test:coverage -- --watchAll=false
