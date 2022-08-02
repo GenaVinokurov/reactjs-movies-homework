@@ -1,6 +1,5 @@
 import React from 'react';
 import { Container } from '@mui/system';
-import './App.scss';
 import Main from './pages/Main';
 import Header from './components/Header';
 
