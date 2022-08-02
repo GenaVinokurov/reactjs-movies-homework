@@ -2,6 +2,6 @@
   "extends": ["stylelint-config-standard-scss", "stylelint-config-prettier-scss"],
   "rules": {
     "rule-empty-line-before": "never",
-    "selector-class-pattern": "false"
+    "selector-class-pattern": null
   }
 }
