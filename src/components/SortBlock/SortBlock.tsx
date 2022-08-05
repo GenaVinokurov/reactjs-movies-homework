@@ -6,13 +6,13 @@ import style from './SortBlock.module.scss';
 function SortBlock() {
   const onClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     const el = e.target as HTMLButtonElement;
-    const prevEl = document.getElementById('activeSort') as HTMLButtonElement;
+    const prevEl = document.getElementById('active-sort') as HTMLButtonElement;
     prevEl.removeAttribute('id');
-    el.id = 'activeSort';
+    el.id = 'active-sort';
   };
   return (
     <ButtonGroup className={style.container} color="secondary">
-      <ButtonElem buttonClassName={style.btn} onClick={onClick} id="activeSort">
+      <ButtonElem buttonClassName={style.btn} onClick={onClick} id="active-sort">
         Popular
       </ButtonElem>
       <ButtonElem buttonClassName={style.btn} onClick={onClick}>
