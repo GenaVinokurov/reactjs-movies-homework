@@ -1,0 +1,86 @@
+[
+  {
+    "title": "First film",
+    "vote_average": 8.8,
+    "poster_path": "https://via.placeholder.com/300.png/09f/fff",
+    "genre": "comedy horror",
+    "id": 0
+  },
+  {
+    "title": "Second film with long title",
+    "vote_average": 5.2,
+    "poster_path": "https://via.placeholder.com/300.png/09f/fff",
+    "genre": "comedy horror historical",
+    "id": 1
+  },
+  {
+    "title": "First film",
+    "vote_average": 8.8,
+    "poster_path": "https://via.placeholder.com/300.png/09f/fff",
+    "genre": "comedy horror",
+    "id": 2
+  },
+  {
+    "title": "Second film with long title",
+    "vote_average": 5.2,
+    "poster_path": "https://via.placeholder.com/300.png/09f/fff",
+    "genre": "comedy horror historical",
+    "id": 3
+  },
+  {
+    "title": "First film",
+    "vote_average": 8.8,
+    "poster_path": "https://via.placeholder.com/300.png/09f/fff",
+    "genre": "comedy horror",
+    "id": 4
+  },
+  {
+    "title": "Second film with long title",
+    "vote_average": 5.2,
+    "poster_path": "https://via.placeholder.com/300.png/09f/fff",
+    "genre": "comedy horror historical",
+    "id": 5
+  },
+  {
+    "title": "First film",
+    "vote_average": 8.8,
+    "poster_path": "https://via.placeholder.com/300.png/09f/fff",
+    "genre": "comedy horror",
+    "id": 6
+  },
+  {
+    "title": "Second film with long title",
+    "vote_average": 5.2,
+    "poster_path": "https://via.placeholder.com/300.png/09f/fff",
+    "genre": "comedy horror historical",
+    "id": 7
+  },
+  {
+    "title": "First film",
+    "vote_average": 8.8,
+    "poster_path": "https://via.placeholder.com/300.png/09f/fff",
+    "genre": "comedy horror",
+    "id": 8
+  },
+  {
+    "title": "Second film with long title",
+    "vote_average": 5.2,
+    "poster_path": "https://via.placeholder.com/300.png/09f/fff",
+    "genre": "comedy horror historical",
+    "id": 9
+  },
+  {
+    "title": "First film",
+    "vote_average": 8.8,
+    "poster_path": "https://via.placeholder.com/300.png/09f/fff",
+    "genre": "comedy horror",
+    "id": 10
+  },
+  {
+    "title": "Second film with long title",
+    "vote_average": 5.2,
+    "poster_path": "https://via.placeholder.com/300.png/09f/fff",
+    "genre": "comedy horror historical",
+    "id": 11
+  }
+]
