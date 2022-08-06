@@ -6,7 +6,7 @@ import style from './Header.module.scss';
 
 function Header() {
   return (
-    <AppBar position="static" sx={{ p: '5px 10px' }}>
+    <AppBar position="static" sx={{ p: '5px 10px', mb: '35px' }}>
       <Toolbar className={style.container}>
         <Typography variant="h4" component="h1">
           Movies

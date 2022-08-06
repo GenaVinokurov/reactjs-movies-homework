@@ -1,0 +1,47 @@
+.container {
+  display: grid;
+}
+.main {
+  display: grid;
+  grid-template-columns: 25% 73%;
+  grid-gap: 25px;
+}
+.photo {
+  width: 100%;
+  height: auto;
+}
+.information {
+  display: grid;
+  grid-row-gap: 35px;
+}
+.text__wrapper {
+  display: grid;
+}
+// .text__biography {
+//   overflow: hidden;
+//   position: relative;
+//   max-height: 325px;
+// }
+// .text__biography:after {
+//   content: '';
+//   text-align: right;
+//   position: absolute;
+//   bottom: 0;
+//   right: 0;
+//   left: 0;
+//   height: 1.2em;
+//   background: linear-gradient(to bottom, rgba(255, 255, 255, 0), white 100%);
+//   pointer-events: none;
+// }
+.photos__container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  grid-gap: 20px;
+}
+.collection__wrapper {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  grid-auto-rows: 400px;
+  grid-gap: 20px;
+  width: 100%;
+}
