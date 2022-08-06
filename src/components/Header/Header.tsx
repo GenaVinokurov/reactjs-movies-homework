@@ -1,7 +1,7 @@
 import { AppBar, Toolbar, Typography } from '@mui/material';
 import React from 'react';
 import Search from '../Search';
-import SelectElem from '../SelectElem';
+import SelectLang from '../SelectLang';
 import style from './Header.module.scss';
 
 function Header() {
@@ -12,7 +12,7 @@ function Header() {
           Movies
         </Typography>
         <Search />
-        <SelectElem />
+        <SelectLang />
       </Toolbar>
     </AppBar>
   );

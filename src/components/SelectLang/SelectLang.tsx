@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import { MenuItem } from '@mui/material';
-import style from './SelectElem.module.scss';
+import style from './SelectLang.module.scss';
 
-function SelectElem() {
+function SelectLang() {
   const [lang, setLang] = useState('En');
 
   const handleChange = (event: SelectChangeEvent) => {
@@ -22,4 +22,4 @@ function SelectElem() {
   );
 }
 
-export default SelectElem;
+export default SelectLang;

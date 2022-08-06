@@ -1,9 +1,14 @@
 .container {
   position: relative;
+  display: flex;
+  flex-direction: column;
 }
 .img {
-  width: 100%;
-  height: auto;
+  flex: 3;
+  position: relative;
+  background-size: cover;
+  background-position: center;
+  background-color: grey;
   margin-bottom: 0.5rem;
   border-radius: 8px;
 }
@@ -16,7 +21,33 @@
   padding: 4px 8px;
   font-size: 12px;
   color: #fff;
+  z-index: 2;
   &.success {
     background-color: #2e7d32;
   }
+}
+.substrate {
+  visibility: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 8px;
+}
+.img:hover .substrate {
+  visibility: inherit;
+}
+.link__video {
+  background-color: #fff;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
