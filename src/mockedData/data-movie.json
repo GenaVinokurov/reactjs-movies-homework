@@ -1,0 +1,22 @@
+{
+  "original_title": "Title movie",
+  "overview": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odit ipsam neque et, magnam voluptas tempora pariatur, provident repellat laborum recusandae iste? Sint minima placeat repudiandae delectus. Deserunt delectus autem ab sed, ut nam ipsum itaque eos numquam, commodi eum pariatur natus repellat eligendi voluptatem possimus nihil asperiores voluptatibus vitae dicta amet deleniti ipsam tenetur! Dicta culpa quidem reiciendis eveniet similique natus? Et voluptatem consequatur libero cumque, soluta rem odit error, eum harum facilis natus quo nihil eveniet a quos ab exercitationem possimus. Sequi itaque corrupti id laborum enim nisi laudantium, autem iusto nesciunt minus sint libero, ipsa recusandae voluptate? Provident.",
+  "release_date": "15.08.2022",
+  "revenue": 40000000,
+  "runtime": "2:15",
+  "poster_path": "https://via.placeholder.com/300.png/09f/fff",
+  "genres": [
+    {
+      "id": 1,
+      "name": "comedy"
+    },
+    {
+      "id": 2,
+      "name": "horror"
+    },
+    {
+      "id": 3,
+      "name": "historical"
+    }
+  ]
+}

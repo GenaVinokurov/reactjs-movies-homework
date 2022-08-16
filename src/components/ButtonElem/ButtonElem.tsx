@@ -3,7 +3,14 @@ import React from 'react';
 import { TypeButton } from '../types';
 import style from './ButtonElem.module.scss';
 
-function ButtonElem({ buttonClassName, colorType = 'primary', children, onClick, id }: TypeButton) {
+function ButtonElem({
+  buttonClassName,
+  colorType = 'primary',
+  variant,
+  children,
+  onClick,
+  id,
+}: TypeButton) {
   return (
     <Button
       className={`${style.btn}, ${buttonClassName}`}
@@ -11,6 +18,7 @@ function ButtonElem({ buttonClassName, colorType = 'primary', children, onClick,
       color={colorType}
       onClick={(e) => onClick(e)}
       id={id}
+      variant={variant}
     >
       {children}
     </Button>

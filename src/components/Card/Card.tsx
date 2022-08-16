@@ -1,15 +1,20 @@
 import { Typography } from '@mui/material';
 import React from 'react';
+import classNames from 'classnames';
 import PlayCircleIcon from '@mui/icons-material/PlayCircle';
 import { TypeMovieCard } from '../types';
 import style from './Card.module.scss';
 
 function Card(movieData: TypeMovieCard) {
-  const { title, vote_average, poster_path, genre } = movieData;
+  const { title, vote_average, poster_path, genre, actorClass } = movieData;
+
+  const containerClasses = classNames(style.container, { [style.actor__class]: actorClass });
+  const imgClasses = classNames(style.img, { [style.actor__img]: actorClass });
+
   return (
-    <div className={style.container}>
+    <div className={containerClasses}>
       <span className={style.rating}>{vote_average}</span>
-      <div style={{ backgroundImage: ` URL(${poster_path})` }} className={style.img}>
+      <div style={{ backgroundImage: ` URL(${poster_path})` }} className={imgClasses}>
         <div className={style.substrate}>
           <a href="*" className={style.link__video}>
             <PlayCircleIcon
@@ -18,10 +23,12 @@ function Card(movieData: TypeMovieCard) {
           </a>
         </div>
       </div>
-      <Typography variant="h5" component="p">
+      <Typography variant="h5" component="p" className={style.text}>
         {title}
       </Typography>
-      <Typography component="span">{genre}</Typography>
+      <Typography component="span" className={style.text}>
+        {genre}
+      </Typography>
     </div>
   );
 }

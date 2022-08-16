@@ -2,9 +2,13 @@
   position: relative;
   display: flex;
   flex-direction: column;
+  width: 100%;
 }
 .img {
-  flex: 3;
+  // flex: 3;
+  height: 100%;
+  width: auto;
+  min-height: 200px;
   position: relative;
   background-size: cover;
   background-position: center;
@@ -50,4 +54,18 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
+.text {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+.actor {
+  &__class {
+    min-width: 100px;
+  }
+  &__img {
+    height: 150px;
+  }
 }
