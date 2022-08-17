@@ -25,6 +25,7 @@
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+  border-radius: 4px;
 }
 .collection__wrapper {
   display: grid;
@@ -54,5 +55,42 @@
   &__active {
     overflow: auto;
     height: auto;
+  }
+  &__btn {
+    background-color: none;
+  }
+}
+@media (max-width: 1145px) {
+  .main {
+    grid-template-columns: auto;
+  }
+  .photo {
+    max-width: 200px;
+    max-height: 200px;
+  }
+  .photos__container {
+    justify-content: center;
+  }
+  .actors {
+    &__wrapper {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+}
+@media (max-width: 778px) {
+  .actors {
+    &__wrapper {
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    }
+  }
+  .images__container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 490px) {
+  .actors {
+    &__wrapper {
+      grid-template-columns: 1fr;
+    }
   }
 }

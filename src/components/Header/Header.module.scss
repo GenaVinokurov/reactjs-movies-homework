@@ -2,3 +2,15 @@
   display: flex;
   justify-content: space-between;
 }
+@media (max-width: 475px) {
+  :global(.MuiToolbar-root.MuiToolbar-gutters.MuiToolbar-regular) {
+    &.container {
+      padding: 0;
+    }
+  }
+  :global(.MuiTypography-root) {
+    &.title {
+      font-size: 22px;
+    }
+  }
+}

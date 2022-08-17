@@ -55,11 +55,15 @@
   justify-content: center;
   align-items: center;
 }
-.text {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  max-width: 100%;
+
+:global(.css-ag7rrr-MuiTypography-root) {
+  &.text {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+    line-height: 1.7;
+  }
 }
 .actor {
   &__class {

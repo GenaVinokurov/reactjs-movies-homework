@@ -20,7 +20,7 @@ function ActorPage() {
           <Paragraph title="Place of birth:" content={place_of_birth} />
           <Paragraph title="Biography:" content={biography} />
           <div>
-            <Typography variant="subtitle2" component="span">
+            <Typography variant="h6" component="p" sx={{ mb: '10px' }}>
               Photos:
             </Typography>
             <div className={style.photos__container}>
@@ -33,13 +33,13 @@ function ActorPage() {
         </div>
       </div>
       <div className={style.collection}>
-        <Typography variant="h3" component="p" sx={{ mb: '45px' }}>
+        <Typography variant="h3" component="p" sx={{ mb: '15px' }}>
           KNOWN BY
         </Typography>
         <div className={style.collection__wrapper}>
           {dataMovies &&
-            dataMovies.map((movie) => {
-              return <Card key={movie.id} {...movie} />;
+            dataMovies.map((movie, i) => {
+              return i < 10 ? <Card key={movie.id} {...movie} /> : null;
             })}
         </div>
       </div>

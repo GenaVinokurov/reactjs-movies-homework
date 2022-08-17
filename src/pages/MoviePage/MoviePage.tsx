@@ -70,7 +70,7 @@ function MoviePage() {
             </div>
           </div>
           <div className={style.text__wrapper}>
-            <Typography variant="subtitle2" component="span">
+            <Typography variant="h6" component="p" sx={{ mb: '10px' }}>
               Images
             </Typography>
             <div className={style.images__container}>

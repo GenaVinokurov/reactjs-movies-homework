@@ -10,12 +10,7 @@ function SelectLang() {
     setLang(event.target.value as string);
   };
   return (
-    <Select
-      value={lang}
-      onChange={handleChange}
-      className={style.select}
-      sx={{ color: '#fff', width: '70px', height: '40px' }}
-    >
+    <Select value={lang} onChange={handleChange} className={style.select}>
       <MenuItem value="En">En</MenuItem>
       <MenuItem value="Ru">Ru</MenuItem>
     </Select>
