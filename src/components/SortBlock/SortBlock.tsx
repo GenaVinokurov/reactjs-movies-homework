@@ -1,26 +1,29 @@
 import { ButtonGroup } from '@mui/material';
-import React from 'react';
+import classNames from 'classnames';
+import React, { useState } from 'react';
 import ButtonElem from '../ButtonElem';
 import style from './SortBlock.module.scss';
 
 function SortBlock() {
-  const onClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-    const el = e.target as HTMLButtonElement;
-    const prevEl = document.getElementById('active-sort') as HTMLButtonElement;
-    prevEl.removeAttribute('id');
-    el.id = 'active-sort';
+  const sort = ['Popular', 'Top rated', 'Upcoming'];
+  const [activeSort, setActiveSort] = useState(sort[0]);
+  const onClick = (el: string) => {
+    setActiveSort(el);
   };
+
   return (
     <ButtonGroup className={style.container} color="secondary">
-      <ButtonElem buttonClassName={style.btn} onClick={onClick} id="active-sort">
-        Popular
-      </ButtonElem>
-      <ButtonElem buttonClassName={style.btn} onClick={onClick}>
-        Top rated
-      </ButtonElem>
-      <ButtonElem buttonClassName={style.btn} onClick={onClick}>
-        Upcoming
-      </ButtonElem>
+      {sort.map((el) => {
+        return (
+          <ButtonElem
+            buttonClassName={classNames(style.btn, { [style.active]: activeSort === el })}
+            onClick={() => onClick(el)}
+            key={el}
+          >
+            {el}
+          </ButtonElem>
+        );
+      })}
     </ButtonGroup>
   );
 }

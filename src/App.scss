@@ -3,11 +3,18 @@ body {
   box-sizing: border-box;
   font-family: Roboto, sans-serif;
 }
-#active-sort {
-  color: #fff;
-  background-color: #2e7d32;
-  border: 1px solid #2e7d32;
-}
 .MuiTypography-root.MuiTypography-h3 {
   font-size: 30px;
+}
+.app {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 100vh;
+}
+.MuiContainer-root.css-paa1xe-MuiContainer-root {
+  flex: 1;
+  display: flex;
+  margin-top: 0;
+  margin-bottom: 0;
 }

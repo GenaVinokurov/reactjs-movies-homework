@@ -7,10 +7,10 @@ import dataMovies from '../../mockedData/data-movies.json';
 import { TypeMovieCard } from '../../components/types';
 
 function Main() {
+  const PERPAGE = 10;
   const [data, setData] = useState<TypeMovieCard[]>([]);
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const [perPage] = useState(10);
 
   useEffect(() => {
     setLoading(true);
@@ -18,8 +18,8 @@ function Main() {
     setLoading(false);
   }, []);
 
-  const indexOfLast = currentPage * perPage;
-  const indexOfFirst = indexOfLast - perPage;
+  const indexOfLast = currentPage * PERPAGE;
+  const indexOfFirst = indexOfLast - PERPAGE;
   const currentMoviesList = data.slice(indexOfFirst, indexOfLast);
   const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
     setCurrentPage(value);
@@ -31,14 +31,13 @@ function Main() {
     <main className={style.container}>
       <SortBlock />
       <div className={style.cards__container}>
-        {currentMoviesList &&
-          currentMoviesList.map((movie) => {
-            return <Card key={movie.id} {...movie} />;
-          })}
+        {currentMoviesList?.map((movie) => {
+          return <Card key={movie.id} {...movie} />;
+        })}
       </div>
       <div className={style.pagination__wrapper}>
         <Pagination
-          count={Math.ceil(data.length / perPage)}
+          count={Math.ceil(data.length / PERPAGE)}
           onChange={handleChange}
           color="primary"
           hideNextButton

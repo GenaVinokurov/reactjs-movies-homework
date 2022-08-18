@@ -37,10 +37,9 @@ function ActorPage() {
           KNOWN BY
         </Typography>
         <div className={style.collection__wrapper}>
-          {dataMovies &&
-            dataMovies.map((movie, i) => {
-              return i < 10 ? <Card key={movie.id} {...movie} /> : null;
-            })}
+          {dataMovies?.map((movie, i) => {
+            return i < 10 ? <Card key={movie.id} {...movie} /> : null;
+          })}
         </div>
       </div>
     </div>

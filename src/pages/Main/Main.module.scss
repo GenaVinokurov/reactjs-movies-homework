@@ -2,6 +2,8 @@
   display: flex;
   flex-direction: column;
   align-items: flex-end;
+  justify-content: space-between;
+  flex-grow: 3;
 }
 .cards__container {
   display: grid;
@@ -10,11 +12,13 @@
   grid-gap: 20px;
   width: 100%;
   margin-bottom: 50px;
+  height: 100%;
 }
-.pagination__wrapper {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 50px;
+.pagination {
+  &__wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 }

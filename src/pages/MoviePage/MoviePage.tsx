@@ -14,16 +14,12 @@ function MoviePage() {
   const { original_title, poster_path, overview, release_date, revenue, runtime, genres } =
     dataMovie as TypeDataMovie;
   const [isOpenActors, setIsOpenActors] = useState(false);
-  const [textButton, setTextButton] = useState('Show all');
   const actorsClassNames = classNames(style.actors__wrapper, {
     [style.actors__active]: isOpenActors,
   });
 
   const isOpenActorsCollection = () => {
-    setIsOpenActors(!isOpenActors);
-    if (isOpenActors) {
-      setTextButton('Show all');
-    } else setTextButton('Hide');
+    setIsOpenActors(() => !isOpenActors);
   };
 
   return (
@@ -44,10 +40,9 @@ function MoviePage() {
           <Paragraph title="Revenue:" content={`$ ${revenue}`} />
           <Paragraph title="Duration:" content={runtime} />
           <div className={style.genre__wrapper}>
-            {genres &&
-              genres.map((genre) => {
-                return <Chip key={genre.id} label={genre.name} color="success" />;
-              })}
+            {genres?.map((genre) => {
+              return <Chip key={genre.id} label={genre.name} color="success" />;
+            })}
           </div>
           <div className={style.actors__collection}>
             <div className={style.actors__head}>
@@ -59,7 +54,7 @@ function MoviePage() {
                 buttonClassName={style.actors__btn}
                 variant="contained"
               >
-                {textButton}
+                {isOpenActors ? 'Hide' : 'Show all'}
               </ButtonElem>
             </div>
             <div className={actorsClassNames}>
