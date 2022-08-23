@@ -9,7 +9,7 @@ import ActorPage from './pages/ActorPage';
 
 function App() {
   return (
-    <div className="app">
+    <div className="app" data-testid="app">
       <Header />
       <Container sx={{ mt: '1rem' }} maxWidth="xl">
         {/* <Main /> */}
