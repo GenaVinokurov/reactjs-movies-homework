@@ -50,8 +50,7 @@
     "no-param-reassign": [
       "error",
       {
-        "props": false,
-        "ignorePropertyModificationsFor": ["state"]
+        "props": false
       }
     ],
     "no-console": [
