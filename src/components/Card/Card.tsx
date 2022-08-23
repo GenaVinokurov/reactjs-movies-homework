@@ -12,7 +12,7 @@ function Card(movieData: TypeMovieCard) {
   const imgClasses = classNames(style.img, { [style.actor__img]: actorClass });
 
   return (
-    <div className={containerClasses}>
+    <div className={containerClasses} title="card">
       <span className={style.rating}>{vote_average}</span>
       <div style={{ backgroundImage: ` URL(${poster_path})` }} className={imgClasses}>
         <div className={style.substrate}>

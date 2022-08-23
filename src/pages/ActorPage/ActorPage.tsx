@@ -11,9 +11,9 @@ function ActorPage() {
   return (
     <div className={style.container}>
       <div className={style.main}>
-        <img src={poster_path} alt="poster" className={style.photo} />
+        <img src={poster_path} alt="poster" className={style.photo} data-testid="img" />
         <div className={style.information}>
-          <Typography variant="h4" component="p">
+          <Typography variant="h4" component="p" data-testid="name">
             {name}
           </Typography>
           <Paragraph title="Birthday:" content={birthday} />

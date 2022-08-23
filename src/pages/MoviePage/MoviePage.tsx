@@ -25,7 +25,7 @@ function MoviePage() {
   return (
     <div className={style.container}>
       <div className={style.main}>
-        <img src={poster_path} alt="poster" className={style.photo} />
+        <img src={poster_path} alt="poster" className={style.photo} data-testid="img" />
         <div className={style.information}>
           <div>
             <Typography variant="subtitle2" component="span">
