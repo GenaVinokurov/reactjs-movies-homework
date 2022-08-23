@@ -1,5 +1,4 @@
 import { render, screen } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
 import React from 'react';
 import MoviePage from './MoviePage';
 
@@ -14,6 +13,6 @@ describe('mainTests', () => {
   it('img', async () => {
     render(<MoviePage />);
     const img = (await screen.findByTestId('img')) as HTMLImageElement;
-    expect(img.src != '').toBe(true);
+    expect(img.src !== '').toBe(true);
   });
 });
