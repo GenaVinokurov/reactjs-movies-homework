@@ -1,0 +1,23 @@
+:global(.MuiOutlinedInput-root) {
+  &.select {
+    border: 1px solid #fff;
+    color: #fff;
+    width: 50px;
+    height: 40px;
+    :global(.css-hfutr2-MuiSvgIcon-root-MuiSelect-icon) {
+      opacity: 0;
+      transform: rotate(180deg);
+    }
+    :global(.MuiSelect-select.MuiSelect-outlined.MuiOutlinedInput-input.MuiInputBase-input) {
+      text-overflow: inherit;
+    }
+    svg {
+      fill: #fff;
+      top: 26px;
+      right: 5px;
+      width: 1.5em;
+      height: 1.5em;
+      transition: 0.245s;
+    }
+  }
+}
