@@ -42,7 +42,6 @@ function Main() {
           color="primary"
           hideNextButton
           hidePrevButton
-          data-testid="pagination"
         />
       </div>
     </main>

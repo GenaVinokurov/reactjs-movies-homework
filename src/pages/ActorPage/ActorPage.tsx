@@ -11,7 +11,7 @@ function ActorPage() {
   return (
     <div className={style.container}>
       <div className={style.main}>
-        <img src={poster_path} alt="poster" className={style.photo} data-testid="img" />
+        <img src={poster_path} alt="poster" className={style.photo} />
         <div className={style.information}>
           <Typography variant="h4" component="p" data-testid="name">
             {name}

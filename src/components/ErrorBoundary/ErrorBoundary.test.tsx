@@ -6,13 +6,7 @@ describe('Error Boundary', () => {
     const ThrowError = () => {
       throw new Error('Test');
     };
-
-    render(
-      <ErrorBoundary>
-        <ThrowError />
-      </ErrorBoundary>
-    );
-
-    expect(screen.getByTestId('error-boundary')).toBeVisible();
+    render(<ErrorBoundary>{<ThrowError />}</ErrorBoundary>);
+    expect(screen.getByText('Sorry.. there was an error')).toBeVisible();
   });
 });

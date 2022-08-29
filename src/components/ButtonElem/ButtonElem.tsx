@@ -21,7 +21,6 @@ function ButtonElem({
       onClick={(e) => onClick(e)}
       id={id}
       variant={variant}
-      data-testid="button-elem"
     >
       {children}
     </Button>

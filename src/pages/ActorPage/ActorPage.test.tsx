@@ -2,17 +2,17 @@ import { render, screen } from '@testing-library/react';
 import React from 'react';
 import ActorPage from './ActorPage';
 
-describe('mainTests', () => {
-  it('exist all cards', async () => {
+describe('Actor page', () => {
+  it('exist all data', () => {
     render(<ActorPage />);
-    const cards = await screen.findAllByTitle('card');
+    const cards = screen.getAllByTitle('card');
     cards.forEach((el) => {
       expect(el).toBeInTheDocument();
     });
   });
-  it('img', async () => {
+  it('img', () => {
     render(<ActorPage />);
-    const img = (await screen.findByTestId('img')) as HTMLImageElement;
-    expect(img.src !== '').toBe(true);
+    const img = screen.getByAltText('poster') as HTMLImageElement;
+    expect(img).toBeInTheDocument();
   });
 });

@@ -7,9 +7,6 @@ import style from './SortBlock.module.scss';
 function SortBlock() {
   const sort = ['Popular', 'Top rated', 'Upcoming'];
   const [activeSort, setActiveSort] = useState(sort[0]);
-  const onClick = (el: string) => {
-    setActiveSort(el);
-  };
 
   return (
     <ButtonGroup className={style.container} color="secondary">
@@ -17,7 +14,7 @@ function SortBlock() {
         return (
           <ButtonElem
             buttonClassName={classNames(style.btn, { [style.active]: activeSort === el })}
-            onClick={() => onClick(el)}
+            onClick={() => setActiveSort(el)}
             key={el}
           >
             {el}
