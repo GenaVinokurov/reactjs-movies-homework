@@ -57,12 +57,12 @@ function MoviePage() {
                 {isOpenActors ? 'Hide' : 'Show all'}
               </ButtonElem>
             </div>
-            <div className={actorsClassNames}>
+            {/* <div className={actorsClassNames}>
               {dataMovies &&
                 dataMovies.map((movie) => {
                   return <Card key={movie.id} actorClass {...movie} />;
                 })}
-            </div>
+            </div> */}
           </div>
           <div className={style.text__wrapper}>
             <Typography variant="h6" component="p" sx={{ mb: '10px' }}>
@@ -87,12 +87,12 @@ function MoviePage() {
         <Typography variant="h3" component="p" sx={{ mb: '15px' }}>
           Recommendations
         </Typography>
-        <div className={style.collection__wrapper}>
+        {/* <div className={style.collection__wrapper}>
           {dataMovies &&
             dataMovies.map((movie, i) => {
               return i < 5 ? <Card key={movie.id} {...movie} /> : null;
             })}
-        </div>
+        </div> */}
       </div>
     </div>
   );

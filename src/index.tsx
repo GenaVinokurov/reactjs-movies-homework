@@ -1,8 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { ThemeProvider, createTheme } from '@mui/material';
-import App from './App';
+import { Provider } from 'react-redux';
 import ErrorBoundary from './components/ErrorBoundary';
+import { setupStore } from './store/store';
+import App from './App';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 const theme = createTheme({
@@ -15,12 +17,15 @@ const theme = createTheme({
     },
   },
 });
+const store = setupStore();
 root.render(
   <React.StrictMode>
     <ErrorBoundary>
-      <ThemeProvider theme={theme}>
-        <App />
-      </ThemeProvider>
+      <Provider store={store}>
+        <ThemeProvider theme={theme}>
+          <App />
+        </ThemeProvider>
+      </Provider>
     </ErrorBoundary>
   </React.StrictMode>
 );

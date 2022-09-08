@@ -21,7 +21,7 @@ export type TypeMovieCard = {
   title: string;
   vote_average: number;
   poster_path: string;
-  genre: string;
+  genre_ids: number[];
   id: number;
   actorClass?: boolean;
 };
@@ -34,4 +34,11 @@ export type TypeDataMovie = {
   runtime: string;
   poster_path: string;
   genres: { id: number; name: string }[];
+};
+
+export type TypeGetMovie = {
+  page: number;
+  results: TypeMovieCard[];
+  total_results: number;
+  total_pages: number;
 };

@@ -36,11 +36,11 @@ function ActorPage() {
         <Typography variant="h3" component="p" sx={{ mb: '15px' }}>
           KNOWN BY
         </Typography>
-        <div className={style.collection__wrapper}>
+        {/* <div className={style.collection__wrapper}>
           {dataMovies?.map((movie, i) => {
             return i < 10 ? <Card key={movie.id} {...movie} /> : null;
           })}
-        </div>
+        </div> */}
       </div>
     </div>
   );

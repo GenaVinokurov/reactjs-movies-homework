@@ -7,6 +7,5 @@ describe('card tests', () => {
   it('card content', () => {
     render(<Card {...data[0]} />);
     expect(screen.getByText(/first film/i)).toBeInTheDocument();
-    expect(screen.getByText(/comedy horror/i)).toBeInTheDocument();
   });
 });
