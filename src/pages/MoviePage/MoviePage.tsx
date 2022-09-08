@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Chip, Typography } from '@mui/material';
-import classNames from 'classnames';
+// import classNames from 'classnames';
 import style from './MoviePage.module.scss';
 // import dataMovies from '../../mockedData/data-movies.json';
 import dataMovie from '../../mockedData/data-movie.json';

@@ -21,7 +21,7 @@ function Main() {
 
   useEffect(() => {
     if (data?.total_pages) dispatch(changeTotalPages(data.total_pages));
-  }, []);
+  }, [data, changeTotalPages, dispatch]);
 
   // const indexOfLast = currentPage * PERPAGE;
   // const indexOfFirst = indexOfLast - PERPAGE;
