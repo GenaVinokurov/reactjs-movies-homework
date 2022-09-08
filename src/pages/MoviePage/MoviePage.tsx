@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import { Chip, Typography } from '@mui/material';
 import classNames from 'classnames';
 import style from './MoviePage.module.scss';
-import dataMovies from '../../mockedData/data-movies.json';
+// import dataMovies from '../../mockedData/data-movies.json';
 import dataMovie from '../../mockedData/data-movie.json';
 import dataImages from '../../mockedData/data-images.json';
-import Card from '../../components/Card';
+// import Card from '../../components/Card';
 import Paragraph from '../../components/Paragraph';
 import { TypeDataMovie } from '../../components/types';
 import ButtonElem from '../../components/ButtonElem';
@@ -14,9 +14,9 @@ function MoviePage() {
   const { original_title, poster_path, overview, release_date, revenue, runtime, genres } =
     dataMovie as TypeDataMovie;
   const [isOpenActors, setIsOpenActors] = useState(false);
-  const actorsClassNames = classNames(style.actors__wrapper, {
-    [style.actors__active]: isOpenActors,
-  });
+  // const actorsClassNames = classNames(style.actors__wrapper, {
+  //   [style.actors__active]: isOpenActors,
+  // });
 
   const isOpenActorsCollection = () => {
     setIsOpenActors(() => !isOpenActors);

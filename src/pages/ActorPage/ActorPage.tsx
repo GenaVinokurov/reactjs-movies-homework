@@ -2,8 +2,8 @@ import React from 'react';
 import { Typography } from '@mui/material';
 import style from './ActorPage.module.scss';
 import dataActor from '../../mockedData/data-actor.json';
-import dataMovies from '../../mockedData/data-movies.json';
-import Card from '../../components/Card';
+// import dataMovies from '../../mockedData/data-movies.json';
+// import Card from '../../components/Card';
 import Paragraph from '../../components/Paragraph';
 
 function ActorPage() {
