@@ -6,17 +6,7 @@ import Main from './Main';
 
 describe('main tests', () => {
   const store = setupStore();
-  // it('exist all cards', () => {
-  //   render(
-  //     <Provider store={store}>
-  //       <Main />
-  //     </Provider>
-  //   );
-  //   const cards = screen.getAllByTitle('card');
-  //   cards.forEach((el) => {
-  //     expect(el).toBeInTheDocument();
-  //   });
-  // });
+
   it('pagination', () => {
     render(
       <Provider store={store}>

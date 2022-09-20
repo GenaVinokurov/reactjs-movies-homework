@@ -1,18 +1,17 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
-import ApiService from './reducers/ApiService';
 import langReducer from './reducers/LangSlice';
 import listReducer from './reducers/ListSlice';
+import genreReducer from './reducers/GenresSlice';
 
 const rootReducer = combineReducers({
   langReducer,
   listReducer,
-  [ApiService.reducerPath]: ApiService.reducer,
+  genreReducer,
 });
 
 export const setupStore = () => {
   return configureStore({
     reducer: rootReducer,
-    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(ApiService.middleware),
   });
 };
 

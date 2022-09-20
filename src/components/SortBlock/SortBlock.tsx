@@ -5,21 +5,20 @@ import { useAppDispatch } from '../../hooks/redux';
 import { listSlice } from '../../store/reducers/ListSlice';
 import ButtonElem from '../ButtonElem';
 import style from './SortBlock.module.scss';
+import { SORT_DATA, SEARCH_DATA } from '../../constants';
 
 function SortBlock() {
-  const sortData = ['popular', 'top rated', 'upcoming'];
-  const searchData = ['popular', 'top_rated', 'upcoming'];
-  const [activeEl, setActiveEl] = useState(sortData[0]);
+  const [activeEl, setActiveEl] = useState(SORT_DATA[0]);
   const { changeSort } = listSlice.actions;
   const dispatch = useAppDispatch();
 
   const handleChange = (i: number) => {
-    dispatch(changeSort(searchData[i]));
-    setActiveEl(sortData[i]);
+    dispatch(changeSort(SEARCH_DATA[i]));
+    setActiveEl(SORT_DATA[i]);
   };
   return (
     <ButtonGroup className={style.container} color="secondary">
-      {sortData.map((el, i) => {
+      {SORT_DATA.map((el, i) => {
         return (
           <ButtonElem
             buttonClassName={classNames(style.btn, { [style.active]: activeEl === el })}

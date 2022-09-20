@@ -17,6 +17,10 @@ export type TypeButton = {
   id?: string;
 };
 
+export type TypeGenres = {
+  genres: { id: number; name: string }[];
+};
+
 export type TypeMovieCard = {
   title: string;
   vote_average: number;
