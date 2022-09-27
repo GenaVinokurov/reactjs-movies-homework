@@ -1,43 +1,38 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { Pagination } from '@mui/material';
+import { useAppDispatch, useAppSelector } from '../../store/store';
 import Card from '../../components/Card';
 import SortBlock from '../../components/SortBlock';
 import style from './Main.module.scss';
-import dataMovies from '../../mockedData/data-movies.json';
 import { TypeMovieCard } from '../../components/types';
+import { actionsCardsMovie } from '../../store/reducers/CardsMovieSlice';
+import { fetchAllDataCards } from '../../store/reducers/CardsActions';
 
 function Main() {
-  const PERPAGE = 10;
-  const [data, setData] = useState<TypeMovieCard[]>([]);
-  const [loading, setLoading] = useState(false);
-  const [currentPage, setCurrentPage] = useState(1);
+  const { cards, sort, page, totalPages, isLoading } = useAppSelector((state) => state.cardsMovie);
+  const { changePage } = actionsCardsMovie;
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
-    setLoading(true);
-    setData(dataMovies);
-    setLoading(false);
-  }, []);
+    dispatch(fetchAllDataCards(sort, page));
+  }, [dispatch, page, sort]);
 
-  const indexOfLast = currentPage * PERPAGE;
-  const indexOfFirst = indexOfLast - PERPAGE;
-  const currentMoviesList = data.slice(indexOfFirst, indexOfLast);
   const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
-    setCurrentPage(value);
+    dispatch(changePage(value));
   };
-  if (loading) {
-    return <h1>Loading...</h1>;
-  }
+
   return (
     <main className={style.container}>
       <SortBlock />
       <div className={style.cards__container}>
-        {currentMoviesList?.map((movie) => {
+        {isLoading && 'Loading...'}
+        {cards.map((movie: TypeMovieCard) => {
           return <Card key={movie.id} {...movie} />;
         })}
       </div>
       <div className={style.pagination__wrapper}>
         <Pagination
-          count={Math.ceil(data.length / PERPAGE)}
+          count={totalPages}
           onChange={handleChange}
           color="primary"
           hideNextButton

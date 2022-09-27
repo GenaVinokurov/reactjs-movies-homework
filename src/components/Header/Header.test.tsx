@@ -1,10 +1,11 @@
-import { render, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import React from 'react';
 import Header from './Header';
+import renderWithProviders from '../../mockedData/test-utils';
 
 describe('test header', () => {
   it('exist title', () => {
-    render(<Header />);
+    renderWithProviders(<Header />);
     expect(screen.getByText(/Movies/i)).toBeInTheDocument();
   });
 });

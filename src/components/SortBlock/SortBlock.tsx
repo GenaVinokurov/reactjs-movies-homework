@@ -1,20 +1,28 @@
 import { ButtonGroup } from '@mui/material';
 import classNames from 'classnames';
 import React, { useState } from 'react';
+import { useAppDispatch } from '../../store/store';
+import { actionsCardsMovie } from '../../store/reducers/CardsMovieSlice';
 import ButtonElem from '../ButtonElem';
 import style from './SortBlock.module.scss';
+import { SORT_DATA, SEARCH_DATA } from '../../constants';
 
 function SortBlock() {
-  const sort = ['Popular', 'Top rated', 'Upcoming'];
-  const [activeSort, setActiveSort] = useState(sort[0]);
+  const [activeEl, setActiveEl] = useState(SORT_DATA[0]);
+  const { changeSort } = actionsCardsMovie;
+  const dispatch = useAppDispatch();
 
+  const handleChange = (i: number) => {
+    dispatch(changeSort(SEARCH_DATA[i]));
+    setActiveEl(SORT_DATA[i]);
+  };
   return (
     <ButtonGroup className={style.container} color="secondary">
-      {sort.map((el) => {
+      {SORT_DATA.map((el, i) => {
         return (
           <ButtonElem
-            buttonClassName={classNames(style.btn, { [style.active]: activeSort === el })}
-            onClick={() => setActiveSort(el)}
+            buttonClassName={classNames(style.btn, { [style.active]: activeEl === el })}
+            onClick={() => handleChange(i)}
             key={el}
           >
             {el}

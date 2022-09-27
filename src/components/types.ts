@@ -16,12 +16,19 @@ export type TypeButton = {
   onClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
   id?: string;
 };
+export type TypeArrayGenres = {
+  id: number;
+  name: string;
+}[];
+export type TypeGenres = {
+  genres: TypeArrayGenres;
+};
 
 export type TypeMovieCard = {
   title: string;
   vote_average: number;
   poster_path: string;
-  genre: string;
+  genre_ids: number[];
   id: number;
   actorClass?: boolean;
 };
@@ -33,5 +40,12 @@ export type TypeDataMovie = {
   revenue: number;
   runtime: string;
   poster_path: string;
-  genres: { id: number; name: string }[];
+  genres: TypeArrayGenres;
+};
+
+export type TypeGetMovie = {
+  page: number;
+  results: TypeMovieCard[];
+  total_results: number;
+  total_pages: number;
 };

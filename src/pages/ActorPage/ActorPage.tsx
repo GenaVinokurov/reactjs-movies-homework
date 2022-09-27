@@ -2,8 +2,8 @@ import React from 'react';
 import { Typography } from '@mui/material';
 import style from './ActorPage.module.scss';
 import dataActor from '../../mockedData/data-actor.json';
-import dataMovies from '../../mockedData/data-movies.json';
-import Card from '../../components/Card';
+// import dataMovies from '../../mockedData/data-movies.json';
+// import Card from '../../components/Card';
 import Paragraph from '../../components/Paragraph';
 
 function ActorPage() {
@@ -36,11 +36,11 @@ function ActorPage() {
         <Typography variant="h3" component="p" sx={{ mb: '15px' }}>
           KNOWN BY
         </Typography>
-        <div className={style.collection__wrapper}>
+        {/* <div className={style.collection__wrapper}>
           {dataMovies?.map((movie, i) => {
             return i < 10 ? <Card key={movie.id} {...movie} /> : null;
           })}
-        </div>
+        </div> */}
       </div>
     </div>
   );

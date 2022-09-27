@@ -1,17 +1,11 @@
-import { render, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import React from 'react';
 import Main from './Main';
+import renderWithProviders from '../../mockedData/test-utils';
 
 describe('main tests', () => {
-  it('exist all cards', () => {
-    render(<Main />);
-    const cards = screen.getAllByTitle('card');
-    cards.forEach((el) => {
-      expect(el).toBeInTheDocument();
-    });
-  });
   it('pagination', () => {
-    render(<Main />);
+    renderWithProviders(<Main />);
     expect(screen.getByLabelText('pagination navigation')).toBeInTheDocument();
   });
 });

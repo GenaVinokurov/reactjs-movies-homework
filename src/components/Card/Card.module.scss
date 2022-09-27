@@ -5,7 +5,6 @@
   width: 100%;
 }
 .img {
-  // flex: 3;
   height: 100%;
   width: auto;
   min-height: 200px;
@@ -55,7 +54,7 @@
   justify-content: center;
   align-items: center;
 }
-:global(.css-ag7rrr-MuiTypography-root) {
+:global(.MuiTypography-root) {
   &.text {
     white-space: nowrap;
     overflow: hidden;
