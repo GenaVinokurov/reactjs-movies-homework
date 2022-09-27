@@ -15,6 +15,9 @@
     "plugin:prettier/recommended"
   ],
   "parser": "@typescript-eslint/parser",
+  "globals": {
+    "JSX": true
+  },
   "parserOptions": {
     "ecmaFeatures": {
       "jsx": true

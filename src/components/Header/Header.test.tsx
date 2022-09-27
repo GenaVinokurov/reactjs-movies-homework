@@ -1,7 +1,7 @@
 import { screen } from '@testing-library/react';
 import React from 'react';
 import Header from './Header';
-import { renderWithProviders } from '../../mockedData/test-utils';
+import renderWithProviders from '../../mockedData/test-utils';
 
 describe('test header', () => {
   it('exist title', () => {
