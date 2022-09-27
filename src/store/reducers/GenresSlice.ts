@@ -1,34 +1,35 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { TypeGenres } from '../../components/types';
+import { TypeGenres, TypeArrayGenres } from '../../components/types';
 
 interface GenresState {
-  genresArray: { id: number; name: string }[];
+  genresArray: TypeArrayGenres;
   isLoading: boolean;
-  error: string;
+  error: string | null;
 }
 const initialState: GenresState = {
   genresArray: [],
   isLoading: false,
-  error: '',
+  error: null,
 };
 
 export const genresSlice = createSlice({
   name: 'genres',
   initialState,
   reducers: {
-    genresFetching(state) {
+    setGenresLoading(state) {
       state.isLoading = true;
     },
-    genresFetchingSuccess(state, action: PayloadAction<TypeGenres>) {
+    setGenresSuccess(state, action: PayloadAction<TypeGenres>) {
       state.isLoading = false;
-      state.error = '';
+      state.error = null;
       state.genresArray = action.payload.genres;
     },
-    genresFetchingError(state, action: PayloadAction<string>) {
+    setGenresError(state, action: PayloadAction<string>) {
       state.isLoading = false;
       state.error = action.payload;
     },
   },
 });
 
+export const { actions: actionsGenres } = genresSlice;
 export default genresSlice.reducer;

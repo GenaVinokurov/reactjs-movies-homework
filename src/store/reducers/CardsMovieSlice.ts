@@ -1,37 +1,37 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { TypeGetMovie, TypeMovieCard } from '../../components/types';
 
-interface ListState {
+interface CardsMovieState {
   cards: TypeMovieCard[];
   isLoading: boolean;
-  error: string;
+  error: string | null;
   sort: string;
   page: number;
   totalPages: number;
 }
-const initialState: ListState = {
+const initialState: CardsMovieState = {
   cards: [],
   isLoading: false,
-  error: '',
+  error: null,
   sort: 'popular',
   page: 1,
   totalPages: 1,
 };
 
-export const listSlice = createSlice({
+export const cardsMovieSlice = createSlice({
   name: 'api',
   initialState,
   reducers: {
-    dataFetching(state) {
+    setCardsMovieLoading(state) {
       state.isLoading = true;
     },
-    dataFetchingSuccess(state, action: PayloadAction<TypeGetMovie>) {
+    setCardsMovieSuccess(state, action: PayloadAction<TypeGetMovie>) {
       state.isLoading = false;
-      state.error = '';
+      state.error = null;
       state.cards = action.payload.results;
       state.totalPages = action.payload?.total_pages;
     },
-    dataFetchingError(state, action: PayloadAction<string>) {
+    setCardsMovieError(state, action: PayloadAction<string>) {
       state.isLoading = false;
       state.error = action.payload;
     },
@@ -47,4 +47,5 @@ export const listSlice = createSlice({
   },
 });
 
-export default listSlice.reducer;
+export const { actions: actionsCardsMovie } = cardsMovieSlice;
+export default cardsMovieSlice.reducer;

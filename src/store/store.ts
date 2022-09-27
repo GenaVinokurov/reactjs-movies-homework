@@ -1,12 +1,13 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
-import langReducer from './reducers/LangSlice';
-import listReducer from './reducers/ListSlice';
-import genreReducer from './reducers/GenresSlice';
+import { createSelectorHook, useDispatch, TypedUseSelectorHook } from 'react-redux';
+import languageReducer from './reducers/LangSlice';
+import cardsMovieReducer from './reducers/CardsMovieSlice';
+import genresReducer from './reducers/GenresSlice';
 
-const rootReducer = combineReducers({
-  langReducer,
-  listReducer,
-  genreReducer,
+export const rootReducer = combineReducers({
+  language: languageReducer,
+  cardsMovie: cardsMovieReducer,
+  genres: genresReducer,
 });
 
 export const setupStore = () => {
@@ -18,3 +19,6 @@ export const setupStore = () => {
 export type RootStore = ReturnType<typeof rootReducer>;
 export type AppStore = ReturnType<typeof setupStore>;
 export type AppDispatch = AppStore['dispatch'];
+
+export const useAppDispatch = () => useDispatch<AppDispatch>();
+export const useAppSelector: TypedUseSelectorHook<RootStore> = createSelectorHook();

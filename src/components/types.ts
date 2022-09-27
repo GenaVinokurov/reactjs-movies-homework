@@ -16,9 +16,12 @@ export type TypeButton = {
   onClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
   id?: string;
 };
-
+export type TypeArrayGenres = {
+  id: number;
+  name: string;
+}[];
 export type TypeGenres = {
-  genres: { id: number; name: string }[];
+  genres: TypeArrayGenres;
 };
 
 export type TypeMovieCard = {
@@ -37,7 +40,7 @@ export type TypeDataMovie = {
   revenue: number;
   runtime: string;
   poster_path: string;
-  genres: { id: number; name: string }[];
+  genres: TypeArrayGenres;
 };
 
 export type TypeGetMovie = {

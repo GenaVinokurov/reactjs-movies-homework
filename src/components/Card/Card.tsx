@@ -4,14 +4,13 @@ import classNames from 'classnames';
 import PlayCircleIcon from '@mui/icons-material/PlayCircle';
 import { TypeMovieCard } from '../types';
 import style from './Card.module.scss';
-import { useAppSelector } from '../../hooks/redux';
+import { useAppSelector } from '../../store/store';
 
 function Card(movieData: TypeMovieCard) {
   const { title, vote_average, poster_path, genre_ids, actorClass } = movieData;
-  const { genresArray } = useAppSelector((state) => state.genreReducer);
+  const { genresArray } = useAppSelector((state) => state.genres);
   const containerClasses = classNames(style.container, { [style.actor__class]: actorClass });
   const imgClasses = classNames(style.img, { [style.actor__img]: actorClass });
-  // console.log(genre_ids, genres);
 
   return (
     <div className={containerClasses} title="card">
@@ -32,11 +31,7 @@ function Card(movieData: TypeMovieCard) {
         {title}
       </Typography>
       <Typography component="span" className={style.text}>
-        {genresArray.map((el) => {
-          return genre_ids.map((id) => {
-            return id === el.id ? `${el.name} ` : null;
-          });
-        })}
+        {genre_ids.map((id) => genresArray.find((el) => el.id === id)?.name || '')}
       </Typography>
     </div>
   );

@@ -1,29 +1,32 @@
 import { TypeGenres } from '../../components/types';
 import { AppDispatch } from '../store';
-import { BASE_URL, API_KEY } from '../../constants';
-import { listSlice } from './ListSlice';
-import { genresSlice } from './GenresSlice';
+import { actionsCardsMovie } from './CardsMovieSlice';
+import { actionsGenres } from './GenresSlice';
 
 export const fetchCardData = (sort: string, page: number) => async (dispatch: AppDispatch) => {
   try {
-    dispatch(listSlice.actions.dataFetching);
-    const response = await fetch(`${BASE_URL}movie/${sort}?api_key=${API_KEY}&page=${page}`);
+    dispatch(actionsCardsMovie.setCardsMovieLoading);
+    const response = await fetch(
+      `${process.env.REACT_APP_BASE_URL}movie/${sort}?api_key=${process.env.REACT_APP_API_KEY}&page=${page}`
+    );
     const data = await response.json();
-    dispatch(listSlice.actions.dataFetchingSuccess(data));
+    dispatch(actionsCardsMovie.setCardsMovieSuccess(data));
   } catch (error) {
     const { message } = error as Error;
-    dispatch(listSlice.actions.dataFetchingError(message));
+    dispatch(actionsCardsMovie.setCardsMovieError(message));
   }
 };
 export const fetchGenresData = () => async (dispatch: AppDispatch) => {
   try {
-    dispatch(genresSlice.actions.genresFetching);
-    const response = await fetch(`${BASE_URL}genre/movie/list?api_key=${API_KEY}`);
+    dispatch(actionsGenres.setGenresLoading);
+    const response = await fetch(
+      `${process.env.REACT_APP_BASE_URL}genre/movie/list?api_key=${process.env.REACT_APP_API_KEY}`
+    );
     const data = (await response.json()) as TypeGenres;
-    dispatch(genresSlice.actions.genresFetchingSuccess(data));
+    dispatch(actionsGenres.setGenresSuccess(data));
   } catch (error) {
     const { message } = error as Error;
-    dispatch(genresSlice.actions.genresFetchingError(message));
+    dispatch(actionsGenres.setGenresError(message));
   }
 };
 

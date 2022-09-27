@@ -20,12 +20,12 @@ const theme = createTheme({
 const store = setupStore();
 root.render(
   <React.StrictMode>
-    <ErrorBoundary>
-      <Provider store={store}>
+    <Provider store={store}>
+      <ErrorBoundary>
         <ThemeProvider theme={theme}>
           <App />
         </ThemeProvider>
-      </Provider>
-    </ErrorBoundary>
+      </ErrorBoundary>
+    </Provider>
   </React.StrictMode>
 );

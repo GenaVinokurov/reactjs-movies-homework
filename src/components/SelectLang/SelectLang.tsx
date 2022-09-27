@@ -2,12 +2,12 @@ import React from 'react';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import { MenuItem } from '@mui/material';
 import style from './SelectLang.module.scss';
-import { useAppDispatch, useAppSelector } from '../../hooks/redux';
-import { langSlice } from '../../store/reducers/LangSlice';
+import { useAppDispatch, useAppSelector } from '../../store/store';
+import { actionsLanguage } from '../../store/reducers/LangSlice';
 
 function SelectLang() {
-  const lang = useAppSelector((state) => state.langReducer.lang);
-  const { changeLang } = langSlice.actions;
+  const lang = useAppSelector((state) => state.language.lang);
+  const { changeLang } = actionsLanguage;
   const dispatch = useAppDispatch();
 
   const handleChange = (event: SelectChangeEvent) => {

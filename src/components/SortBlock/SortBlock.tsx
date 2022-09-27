@@ -1,15 +1,15 @@
 import { ButtonGroup } from '@mui/material';
 import classNames from 'classnames';
 import React, { useState } from 'react';
-import { useAppDispatch } from '../../hooks/redux';
-import { listSlice } from '../../store/reducers/ListSlice';
+import { useAppDispatch } from '../../store/store';
+import { actionsCardsMovie } from '../../store/reducers/CardsMovieSlice';
 import ButtonElem from '../ButtonElem';
 import style from './SortBlock.module.scss';
 import { SORT_DATA, SEARCH_DATA } from '../../constants';
 
 function SortBlock() {
   const [activeEl, setActiveEl] = useState(SORT_DATA[0]);
-  const { changeSort } = listSlice.actions;
+  const { changeSort } = actionsCardsMovie;
   const dispatch = useAppDispatch();
 
   const handleChange = (i: number) => {

@@ -1,16 +1,16 @@
 import React, { useEffect } from 'react';
 import { Pagination } from '@mui/material';
-import { useAppDispatch, useAppSelector } from '../../hooks/redux';
+import { useAppDispatch, useAppSelector } from '../../store/store';
 import Card from '../../components/Card';
 import SortBlock from '../../components/SortBlock';
 import style from './Main.module.scss';
 import { TypeMovieCard } from '../../components/types';
-import { listSlice } from '../../store/reducers/ListSlice';
+import { actionsCardsMovie } from '../../store/reducers/CardsMovieSlice';
 import { fetchAllDataCards } from '../../store/reducers/CardsActions';
 
 function Main() {
-  const { cards, sort, page, totalPages, isLoading } = useAppSelector((state) => state.listReducer);
-  const { changePage } = listSlice.actions;
+  const { cards, sort, page, totalPages, isLoading } = useAppSelector((state) => state.cardsMovie);
+  const { changePage } = actionsCardsMovie;
   const dispatch = useAppDispatch();
 
   useEffect(() => {
