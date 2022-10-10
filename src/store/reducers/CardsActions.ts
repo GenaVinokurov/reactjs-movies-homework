@@ -32,3 +32,17 @@ export const fetchGenresData = () => async (dispatch: AppDispatch) => {
 
 export const fetchAllDataCards = (sort: string, page: number) => async (dispatch: AppDispatch) =>
   Promise.all([dispatch(fetchCardData(sort, page)), dispatch(fetchGenresData())]);
+
+export const fetchSearchData = (query: string) => async (dispatch: AppDispatch) => {
+  try {
+    dispatch(actionsCardsMovie.setCardsMovieLoading);
+    const response = await fetch(
+      `${process.env.REACT_APP_BASE_URL}search/movie?api_key=${process.env.REACT_APP_API_KEY}&query=${query}`
+    );
+    const data = await response.json();
+    dispatch(actionsCardsMovie.setCardsMovieSuccess(data));
+  } catch (error) {
+    const { message } = error as Error;
+    dispatch(actionsCardsMovie.setCardsMovieError(message));
+  }
+};

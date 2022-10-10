@@ -26,10 +26,10 @@ export const cardsMovieSlice = createSlice({
       state.isLoading = true;
     },
     setCardsMovieSuccess(state, action: PayloadAction<TypeGetMovie>) {
-      state.isLoading = false;
-      state.error = null;
       state.cards = action.payload.results;
       state.totalPages = action.payload?.total_pages;
+      state.isLoading = false;
+      state.error = null;
     },
     setCardsMovieError(state, action: PayloadAction<string>) {
       state.isLoading = false;

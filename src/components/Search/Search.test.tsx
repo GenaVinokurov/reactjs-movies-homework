@@ -1,11 +1,12 @@
-import { render, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
+import renderWithProviders from '../../mockedData/test-utils';
 import Search from './Search';
 
 describe('test Search element', () => {
   it('change value', () => {
-    render(<Search />);
+    renderWithProviders(<Search />);
     const search = screen.getByPlaceholderText(/search/i) as HTMLInputElement;
     expect(search).toBeInTheDocument();
     expect(search).not.toHaveFocus();
