@@ -31,7 +31,7 @@ function Card(movieData: TypeMovieCard) {
         {title}
       </Typography>
       <Typography component="span" className={style.text}>
-        {genre_ids.map((id) => genresArray.find((el) => el.id === id)?.name || '')}
+        {genre_ids.map((id) => `${genresArray.find((el) => el.id === id)?.name} ` || '')}
       </Typography>
     </div>
   );
