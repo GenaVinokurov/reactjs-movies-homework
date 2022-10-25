@@ -23,7 +23,7 @@ function Search() {
         placeholder="Search"
         sx={{ ml: 1, flex: 1 }}
         value={request}
-        onChange={(e) => handleChange(e)}
+        onChange={handleChange}
       />
       <IconButton onClick={onSubmit}>
         <SearchIcon />

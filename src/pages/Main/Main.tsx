@@ -24,9 +24,7 @@ function Main() {
   return (
     <main className={style.container}>
       <SortBlock />
-      {cards.length === 0 && (
-        <p className={style.empty}> {cards.length === 0 && 'Movies not found'}</p>
-      )}
+      {cards.length === 0 && <p className={style.empty}> Movies not found</p>}
       <div className={style.cards__container}>
         {isLoading && <p className={style.empty}>Loading...</p>}
         {cards.map((movie: TypeMovieCard) => {
