@@ -1,6 +1,7 @@
 import { IconButton, InputBase, Paper } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import React, { ChangeEvent, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { useAppDispatch } from '../../store/store';
 import { fetchSearchData } from '../../store/reducers/CardsActions';
 
@@ -26,7 +27,9 @@ function Search() {
         onChange={handleChange}
       />
       <IconButton onClick={onSubmit}>
-        <SearchIcon />
+        <Link to="/">
+          <SearchIcon color="primary" />
+        </Link>
       </IconButton>
     </Paper>
   );

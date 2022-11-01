@@ -3,11 +3,13 @@ import { createSelectorHook, useDispatch, TypedUseSelectorHook } from 'react-red
 import languageReducer from './reducers/LangSlice';
 import cardsMovieReducer from './reducers/CardsMovieSlice';
 import genresReducer from './reducers/GenresSlice';
+import movieReducer from './reducers/MovieSlice';
 
 export const rootReducer = combineReducers({
   language: languageReducer,
   cardsMovie: cardsMovieReducer,
   genres: genresReducer,
+  movie: movieReducer,
 });
 
 export const setupStore = () => {

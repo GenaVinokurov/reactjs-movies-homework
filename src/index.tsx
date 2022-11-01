@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { BrowserRouter } from 'react-router-dom';
 import { ThemeProvider, createTheme } from '@mui/material';
 import { Provider } from 'react-redux';
 import ErrorBoundary from './components/ErrorBoundary';
@@ -10,7 +11,7 @@ const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 const theme = createTheme({
   palette: {
     primary: {
-      main: '#283593',
+      main: '#000',
     },
     secondary: {
       main: '#ffeb3b',
@@ -23,7 +24,9 @@ root.render(
     <Provider store={store}>
       <ErrorBoundary>
         <ThemeProvider theme={theme}>
-          <App />
+          <BrowserRouter>
+            <App />
+          </BrowserRouter>
         </ThemeProvider>
       </ErrorBoundary>
     </Provider>

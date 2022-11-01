@@ -1,46 +1,69 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Chip, Typography } from '@mui/material';
+import { useParams } from 'react-router-dom';
 // import classNames from 'classnames';
-import style from './MoviePage.module.scss';
-// import dataMovies from '../../mockedData/data-movies.json';
-import dataMovie from '../../mockedData/data-movie.json';
-import dataImages from '../../mockedData/data-images.json';
-// import Card from '../../components/Card';
+import Card from '../../components/Card';
 import Paragraph from '../../components/Paragraph';
-import { TypeDataMovie } from '../../components/types';
 import ButtonElem from '../../components/ButtonElem';
+import { TypeMoviePage } from '../../components/types';
+import { useAppDispatch, useAppSelector } from '../../store/store';
+import { fetchAllDataMovie } from '../../store/reducers/MovieActions';
+import style from './MoviePage.module.scss';
+import { fetchGenresData } from '../../store/reducers/CardsActions';
 
 function MoviePage() {
-  const { original_title, poster_path, overview, release_date, revenue, runtime, genres } =
-    dataMovie as TypeDataMovie;
   const [isOpenActors, setIsOpenActors] = useState(false);
+  const dispatch = useAppDispatch();
+  const { id } = useParams();
   // const actorsClassNames = classNames(style.actors__wrapper, {
   //   [style.actors__active]: isOpenActors,
   // });
-
   const isOpenActorsCollection = () => {
     setIsOpenActors(() => !isOpenActors);
+  };
+
+  const { data, images, recommendations, loading } = useAppSelector((state) => state.movie) || {};
+  const { genresArray } = useAppSelector((state) => state.genres);
+
+  useEffect(() => {
+    dispatch(fetchAllDataMovie(Number(id)));
+    if (genresArray.length === 0) dispatch(fetchGenresData());
+  }, [id, genresArray.length, dispatch]);
+
+  if (!data || loading) return <div>Loading...</div>;
+
+  const { poster_path, title, overview, release_date, revenue, runtime, genres } =
+    data as TypeMoviePage;
+
+  const getTimeFromMins = (mins: number): string => {
+    const hours = Math.trunc(mins / 60);
+    const minutes = mins % 60;
+    return `${hours}:${minutes}`;
   };
 
   return (
     <div className={style.container}>
       <div className={style.main}>
-        <img src={poster_path} alt="poster" className={style.photo} data-testid="img" />
+        <img
+          src={`https://image.tmdb.org/t/p/original${poster_path}`}
+          alt="poster"
+          className={style.photo}
+        />
         <div className={style.information}>
           <div>
             <Typography variant="subtitle2" component="span">
               Title:
             </Typography>
             <Typography variant="h4" component="p">
-              {original_title}
+              {title}
             </Typography>
           </div>
-          <Paragraph title="Overview:" content={overview} />
+          {overview && <Paragraph title="Overview:" content={overview} />}
           <Paragraph title="Release date:" content={release_date} />
           <Paragraph title="Revenue:" content={`$ ${revenue}`} />
-          <Paragraph title="Duration:" content={runtime} />
+          {runtime && <Paragraph title="Duration:" content={getTimeFromMins(runtime)} />}
           <div className={style.genre__wrapper}>
-            {genres?.map((genre) => {
+            {genres.map((genre) => {
               return <Chip key={genre.id} label={genre.name} color="success" />;
             })}
           </div>
@@ -69,16 +92,17 @@ function MoviePage() {
               Images
             </Typography>
             <div className={style.images__container}>
-              {dataImages &&
-                dataImages.map((img) => {
-                  return (
-                    <div
-                      className={style.image}
-                      key={img.id}
-                      style={{ backgroundImage: ` URL(${img.backdrops.file_path})` }}
-                    />
-                  );
-                })}
+              {images?.map((img, i) => {
+                return i < 8 ? (
+                  <div
+                    className={style.image}
+                    key={img.file_path}
+                    style={{
+                      backgroundImage: ` URL(https://image.tmdb.org/t/p/original${img.file_path})`,
+                    }}
+                  />
+                ) : null;
+              })}
             </div>
           </div>
         </div>
@@ -87,12 +111,11 @@ function MoviePage() {
         <Typography variant="h3" component="p" sx={{ mb: '15px' }}>
           Recommendations
         </Typography>
-        {/* <div className={style.collection__wrapper}>
-          {dataMovies &&
-            dataMovies.map((movie, i) => {
-              return i < 5 ? <Card key={movie.id} {...movie} /> : null;
-            })}
-        </div> */}
+        <div className={style.collection__wrapper}>
+          {recommendations?.map((movie, i) => {
+            return i < 5 ? <Card key={movie.id} {...movie} /> : null;
+          })}
+        </div>
       </div>
     </div>
   );
