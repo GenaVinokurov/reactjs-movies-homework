@@ -1,20 +1,20 @@
+import React, { ChangeEvent, useEffect, useState } from 'react';
+import { Link, useSearchParams } from 'react-router-dom';
 import { IconButton, InputBase, Paper } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
-import React, { ChangeEvent, useState } from 'react';
-import { Link } from 'react-router-dom';
-import { useAppDispatch } from '../../store/store';
-import { fetchSearchData } from '../../store/reducers/CardsActions';
 
 function Search() {
+  const [searchParams] = useSearchParams();
   const [request, setRequest] = useState('');
-  const dispatch = useAppDispatch();
 
-  const onSubmit = () => {
-    dispatch(fetchSearchData(request));
-  };
   const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setRequest(e.target.value);
   };
+  const query = searchParams.get('q');
+  useEffect(() => {
+    setRequest(query || '');
+  }, [query]);
+
   return (
     <Paper
       component="form"
@@ -26,8 +26,8 @@ function Search() {
         value={request}
         onChange={handleChange}
       />
-      <IconButton onClick={onSubmit}>
-        <Link to="/">
+      <IconButton style={{ width: 45, height: 45 }}>
+        <Link to={`/search?q=${request}`}>
           <SearchIcon color="primary" />
         </Link>
       </IconButton>

@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AppDispatch } from '../store';
-import { TypeMovieImages, TypeMovieRecommendations } from '../../components/types';
+import { TypeMovieCast, TypeMovieImages, TypeMovieRecommendations } from '../../components/types';
 
 export const fetchMovieData = createAsyncThunk('movie/fetchData', async (id: number) => {
   const response = await fetch(
@@ -29,9 +29,18 @@ export const fetchMovieRecommendations = createAsyncThunk(
   }
 );
 
+export const fetchMovieCast = createAsyncThunk('movie/cast', async (id: number) => {
+  const response = await fetch(
+    `${process.env.REACT_APP_BASE_URL}movie/${id}/credits?api_key=${process.env.REACT_APP_API_KEY}`
+  );
+  const data = (await response.json()) as TypeMovieCast;
+  return data.cast;
+});
+
 export const fetchAllDataMovie = (id: number) => async (dispatch: AppDispatch) =>
   Promise.all([
     dispatch(fetchMovieData(id)),
     dispatch(fetchMovieImages(id)),
     dispatch(fetchMovieRecommendations(id)),
+    dispatch(fetchMovieCast(id)),
   ]);

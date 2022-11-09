@@ -1,6 +1,6 @@
+import React from 'react';
 import { Button } from '@mui/material';
 import classNames from 'classnames';
-import React from 'react';
 import { TypeButton } from '../types';
 import style from './ButtonElem.module.scss';
 

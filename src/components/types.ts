@@ -64,3 +64,14 @@ export type TypeMovieImages = {
 export type TypeMovieRecommendations = {
   results: TypeMovieCard[];
 };
+
+export type TypeMovieCastData = {
+  id: number;
+  name: string;
+  character: string;
+  profile_path: string;
+};
+
+export type TypeMovieCast = {
+  cast: TypeMovieCastData;
+};

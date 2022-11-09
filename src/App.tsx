@@ -15,6 +15,7 @@ function App() {
       <Container sx={{ mt: '1rem' }} maxWidth="xl">
         <Routes>
           <Route path="/" element={<Main />} />
+          <Route path="/search" element={<Main />} />
           <Route path="/actor" element={<ActorPage />} />
           <Route path="/movie/:id" element={<MoviePage />} />
         </Routes>

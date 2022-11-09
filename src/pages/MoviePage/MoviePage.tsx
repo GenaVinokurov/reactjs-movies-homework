@@ -1,28 +1,33 @@
 import React, { useEffect, useState } from 'react';
 import { Chip, Typography } from '@mui/material';
 import { useParams } from 'react-router-dom';
-// import classNames from 'classnames';
+import classNames from 'classnames';
 import Card from '../../components/Card';
 import Paragraph from '../../components/Paragraph';
 import ButtonElem from '../../components/ButtonElem';
+import Loading from '../../components/Loading';
+import CardActor from '../../components/CardActor';
 import { TypeMoviePage } from '../../components/types';
 import { useAppDispatch, useAppSelector } from '../../store/store';
 import { fetchAllDataMovie } from '../../store/reducers/MovieActions';
-import style from './MoviePage.module.scss';
 import { fetchGenresData } from '../../store/reducers/CardsActions';
+import { getTimeFromMins } from '../../helpers';
+import style from './MoviePage.module.scss';
+import { MAX_IMAGES, MAX_RECOMMENDATIONS } from '../../constants';
 
 function MoviePage() {
   const [isOpenActors, setIsOpenActors] = useState(false);
   const dispatch = useAppDispatch();
   const { id } = useParams();
-  // const actorsClassNames = classNames(style.actors__wrapper, {
-  //   [style.actors__active]: isOpenActors,
-  // });
+  const actorsClassNames = classNames(style.actors__wrapper, {
+    [style.actors__active]: isOpenActors,
+  });
   const isOpenActorsCollection = () => {
     setIsOpenActors(() => !isOpenActors);
   };
 
-  const { data, images, recommendations, loading } = useAppSelector((state) => state.movie) || {};
+  const { data, images, recommendations, cast, loading } =
+    useAppSelector((state) => state.movie) || {};
   const { genresArray } = useAppSelector((state) => state.genres);
 
   useEffect(() => {
@@ -30,16 +35,11 @@ function MoviePage() {
     if (genresArray.length === 0) dispatch(fetchGenresData());
   }, [id, genresArray.length, dispatch]);
 
-  if (!data || loading) return <div>Loading...</div>;
+  if (loading) return <Loading />;
+  if (!data) return <div>Do not have data</div>;
 
   const { poster_path, title, overview, release_date, revenue, runtime, genres } =
     data as TypeMoviePage;
-
-  const getTimeFromMins = (mins: number): string => {
-    const hours = Math.trunc(mins / 60);
-    const minutes = mins % 60;
-    return `${hours}:${minutes}`;
-  };
 
   return (
     <div className={style.container}>
@@ -80,20 +80,20 @@ function MoviePage() {
                 {isOpenActors ? 'Hide' : 'Show all'}
               </ButtonElem>
             </div>
-            {/* <div className={actorsClassNames}>
-              {dataMovies &&
-                dataMovies.map((movie) => {
-                  return <Card key={movie.id} actorClass {...movie} />;
+            <div className={actorsClassNames}>
+              {cast &&
+                cast.map((actor) => {
+                  return <CardActor key={actor.id} {...actor} />;
                 })}
-            </div> */}
+            </div>
           </div>
           <div className={style.text__wrapper}>
             <Typography variant="h6" component="p" sx={{ mb: '10px' }}>
               Images
             </Typography>
             <div className={style.images__container}>
-              {images?.map((img, i) => {
-                return i < 8 ? (
+              {images?.slice(0, MAX_IMAGES).map((img) => {
+                return (
                   <div
                     className={style.image}
                     key={img.file_path}
@@ -101,7 +101,7 @@ function MoviePage() {
                       backgroundImage: ` URL(https://image.tmdb.org/t/p/original${img.file_path})`,
                     }}
                   />
-                ) : null;
+                );
               })}
             </div>
           </div>
@@ -112,8 +112,8 @@ function MoviePage() {
           Recommendations
         </Typography>
         <div className={style.collection__wrapper}>
-          {recommendations?.map((movie, i) => {
-            return i < 5 ? <Card key={movie.id} {...movie} /> : null;
+          {recommendations?.slice(0, MAX_RECOMMENDATIONS).map((movie) => {
+            return <Card key={movie.id} {...movie} />;
           })}
         </div>
       </div>

@@ -1,6 +1,6 @@
+import React, { useState } from 'react';
 import { ButtonGroup } from '@mui/material';
 import classNames from 'classnames';
-import React, { useState } from 'react';
 import { useAppDispatch } from '../../store/store';
 import { actionsCardsMovie } from '../../store/reducers/CardsMovieSlice';
 import ButtonElem from '../ButtonElem';

@@ -1,11 +1,22 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { TypeMoviePage, TypeMovieCard, TypeMovieImagesData } from '../../components/types';
-import { fetchMovieData, fetchMovieImages, fetchMovieRecommendations } from './MovieActions';
+import {
+  TypeMoviePage,
+  TypeMovieCard,
+  TypeMovieImagesData,
+  TypeMovieCastData,
+} from '../../components/types';
+import {
+  fetchMovieCast,
+  fetchMovieData,
+  fetchMovieImages,
+  fetchMovieRecommendations,
+} from './MovieActions';
 
 interface MovieState {
   data: TypeMoviePage | null;
   images: TypeMovieImagesData[] | null;
   recommendations: TypeMovieCard[] | null;
+  cast: TypeMovieCastData[] | null;
   loading: boolean;
   error: string | null;
 }
@@ -14,7 +25,8 @@ const initialState: MovieState = {
   data: null,
   images: null,
   recommendations: null,
-  loading: true,
+  cast: null,
+  loading: false,
   error: null,
 };
 
@@ -51,6 +63,16 @@ export const movieSlice = createSlice({
       state.loading = true;
     },
     [fetchMovieRecommendations.rejected.type]: (state, action: PayloadAction<string>) => {
+      state.error = action.payload;
+      state.loading = false;
+    },
+    [fetchMovieCast.fulfilled.type]: (state, action: PayloadAction<TypeMovieCastData[]>) => {
+      state.cast = action.payload;
+    },
+    [fetchMovieCast.pending.type]: (state) => {
+      state.loading = true;
+    },
+    [fetchMovieCast.rejected.type]: (state, action: PayloadAction<string>) => {
       state.error = action.payload;
       state.loading = false;
     },
