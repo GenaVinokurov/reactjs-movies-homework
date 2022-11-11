@@ -18,7 +18,7 @@ import { MAX_IMAGES, MAX_RECOMMENDATIONS } from '../../constants';
 function MoviePage() {
   const [isOpenActors, setIsOpenActors] = useState(false);
   const dispatch = useAppDispatch();
-  const { movieId } = useParams();
+  const { id: movieId } = useParams();
   const actorsClassNames = classNames(style.actors__wrapper, {
     [style.actors__active]: isOpenActors,
   });
