@@ -11,7 +11,7 @@ interface CardsMovieState {
 }
 const initialState: CardsMovieState = {
   cards: [],
-  isLoading: true,
+  isLoading: false,
   error: null,
   sort: 'popular',
   page: 1,

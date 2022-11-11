@@ -5,7 +5,7 @@ import { actionsGenres } from './GenresSlice';
 
 export const fetchCardData = (sort: string, page: number) => async (dispatch: AppDispatch) => {
   try {
-    dispatch(actionsCardsMovie.setCardsMovieLoading);
+    dispatch(actionsCardsMovie.setCardsMovieLoading());
     const response = await fetch(
       `${process.env.REACT_APP_BASE_URL}movie/${sort}?api_key=${process.env.REACT_APP_API_KEY}&page=${page}`
     );
@@ -18,7 +18,7 @@ export const fetchCardData = (sort: string, page: number) => async (dispatch: Ap
 };
 export const fetchGenresData = () => async (dispatch: AppDispatch) => {
   try {
-    dispatch(actionsGenres.setGenresLoading);
+    dispatch(actionsGenres.setGenresLoading());
     const response = await fetch(
       `${process.env.REACT_APP_BASE_URL}genre/movie/list?api_key=${process.env.REACT_APP_API_KEY}`
     );
@@ -35,7 +35,7 @@ export const fetchAllDataCards = (sort: string, page: number) => async (dispatch
 
 export const fetchSearchData = (query: string) => async (dispatch: AppDispatch) => {
   try {
-    dispatch(actionsCardsMovie.setCardsMovieLoading);
+    dispatch(actionsCardsMovie.setCardsMovieLoading());
     const response = await fetch(
       `${process.env.REACT_APP_BASE_URL}search/movie?api_key=${process.env.REACT_APP_API_KEY}&query=${query}`
     );

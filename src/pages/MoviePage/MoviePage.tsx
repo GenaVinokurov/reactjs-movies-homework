@@ -5,7 +5,7 @@ import classNames from 'classnames';
 import Card from '../../components/Card';
 import Paragraph from '../../components/Paragraph';
 import ButtonElem from '../../components/ButtonElem';
-import Loading from '../../components/Loading';
+import Loader from '../../components/Loader';
 import CardActor from '../../components/CardActor';
 import { TypeMoviePage } from '../../components/types';
 import { useAppDispatch, useAppSelector } from '../../store/store';
@@ -18,7 +18,7 @@ import { MAX_IMAGES, MAX_RECOMMENDATIONS } from '../../constants';
 function MoviePage() {
   const [isOpenActors, setIsOpenActors] = useState(false);
   const dispatch = useAppDispatch();
-  const { id } = useParams();
+  const { movieId } = useParams();
   const actorsClassNames = classNames(style.actors__wrapper, {
     [style.actors__active]: isOpenActors,
   });
@@ -31,11 +31,11 @@ function MoviePage() {
   const { genresArray } = useAppSelector((state) => state.genres);
 
   useEffect(() => {
-    dispatch(fetchAllDataMovie(Number(id)));
+    dispatch(fetchAllDataMovie(Number(movieId)));
     if (genresArray.length === 0) dispatch(fetchGenresData());
-  }, [id, genresArray.length, dispatch]);
+  }, [movieId, genresArray.length, dispatch]);
 
-  if (loading) return <Loading />;
+  if (loading) return <Loader />;
   if (!data) return <div>Do not have data</div>;
 
   const { poster_path, title, overview, release_date, revenue, runtime, genres } =
@@ -82,8 +82,15 @@ function MoviePage() {
             </div>
             <div className={actorsClassNames}>
               {cast &&
-                cast.map((actor) => {
-                  return <CardActor key={actor.id} {...actor} />;
+                cast.map(({ id, profile_path, name, character }) => {
+                  return (
+                    <CardActor
+                      key={id}
+                      profile_path={profile_path}
+                      name={name}
+                      character={character}
+                    />
+                  );
                 })}
             </div>
           </div>

@@ -66,7 +66,7 @@ export type TypeMovieRecommendations = {
 };
 
 export type TypeMovieCastData = {
-  id: number;
+  id?: number;
   name: string;
   character: string;
   profile_path: string;

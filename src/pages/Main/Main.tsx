@@ -3,7 +3,7 @@ import { useSearchParams } from 'react-router-dom';
 import { Pagination } from '@mui/material';
 import Card from '../../components/Card';
 import SortBlock from '../../components/SortBlock';
-import Loading from '../../components/Loading';
+import Loader from '../../components/Loader';
 import { TypeMovieCard } from '../../components/types';
 import { useAppDispatch, useAppSelector } from '../../store/store';
 import { actionsCardsMovie } from '../../store/reducers/CardsMovieSlice';
@@ -16,10 +16,10 @@ function Main() {
   const { changePage } = actionsCardsMovie;
   const dispatch = useAppDispatch();
   const [searchParams] = useSearchParams();
-  const postQuery = searchParams.get('q') || null;
+  const postQuery = searchParams.get('q');
 
   useEffect(() => {
-    if (postQuery !== null) dispatch(fetchSearchData(postQuery));
+    if (postQuery) dispatch(fetchSearchData(postQuery));
     else dispatch(fetchAllDataCards(sort, page));
   }, [dispatch, page, sort, postQuery]);
 
@@ -27,7 +27,7 @@ function Main() {
     dispatch(changePage(value));
   };
 
-  if (isLoading) return <Loading />;
+  if (isLoading) return <Loader />;
 
   return (
     <main className={style.container}>

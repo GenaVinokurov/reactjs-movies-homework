@@ -3,8 +3,8 @@ import { Typography } from '@mui/material';
 import { TypeMovieCastData } from '../types';
 import style from './CardActor.module.scss';
 
-function CardActor(actorData: TypeMovieCastData) {
-  const { profile_path, name, character } = actorData;
+function CardActor(props: TypeMovieCastData) {
+  const { profile_path, name, character } = props;
 
   return (
     <div className={style.container}>
