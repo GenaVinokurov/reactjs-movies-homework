@@ -4,12 +4,15 @@
     color: #fff;
     width: 50px;
     height: 40px;
-    :global(.css-hfutr2-MuiSvgIcon-root-MuiSelect-icon) {
+    :global(.MuiSelect-select.MuiSelect-outlined.MuiOutlinedInput-input.MuiInputBase-input) {
+      text-overflow: inherit;
+    }
+    :global(.MuiSvgIcon-root.MuiSvgIcon-fontSizeMedium.MuiSelect-icon.MuiSelect-iconOutlined) {
       opacity: 0;
       transform: rotate(180deg);
     }
-    :global(.MuiSelect-select.MuiSelect-outlined.MuiOutlinedInput-input.MuiInputBase-input) {
-      text-overflow: inherit;
+    :global(.MuiSvgIcon-root.MuiSvgIcon-fontSizeMedium.MuiSelect-icon.MuiSelect-iconOutlined.MuiSelect-iconOpen) {
+      opacity: 1;
     }
     svg {
       fill: #fff;

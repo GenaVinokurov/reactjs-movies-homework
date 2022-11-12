@@ -33,19 +33,45 @@ export type TypeMovieCard = {
   actorClass?: boolean;
 };
 
-export type TypeDataMovie = {
-  original_title: string;
-  overview: string;
-  release_date: string;
-  revenue: number;
-  runtime: string;
-  poster_path: string;
-  genres: TypeArrayGenres;
-};
-
 export type TypeGetMovie = {
   page: number;
   results: TypeMovieCard[];
   total_results: number;
   total_pages: number;
+};
+
+export type TypeMoviePage = {
+  title: string;
+  overview: string | null;
+  vote_average: number;
+  poster_path: string;
+  release_date: string;
+  revenue: number;
+  runtime: number | null;
+  id: number;
+  genres: TypeArrayGenres;
+};
+
+export type TypeMovieImagesData = {
+  file_path: string;
+};
+
+export type TypeMovieImages = {
+  backdrops: TypeMovieImagesData;
+  posters: TypeMovieImagesData;
+};
+
+export type TypeMovieRecommendations = {
+  results: TypeMovieCard[];
+};
+
+export type TypeMovieCastData = {
+  id?: number;
+  name: string;
+  character: string;
+  profile_path: string;
+};
+
+export type TypeMovieCast = {
+  cast: TypeMovieCastData;
 };

@@ -2,6 +2,11 @@
   display: flex;
   justify-content: space-between;
 }
+:global(.MuiTypography-root) {
+  &.title {
+    color: #fff;
+  }
+}
 @media (max-width: 475px) {
   :global(.MuiTypography-root) {
     &.title {

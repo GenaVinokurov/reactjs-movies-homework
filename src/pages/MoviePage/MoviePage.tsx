@@ -1,46 +1,69 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Chip, Typography } from '@mui/material';
-// import classNames from 'classnames';
-import style from './MoviePage.module.scss';
-// import dataMovies from '../../mockedData/data-movies.json';
-import dataMovie from '../../mockedData/data-movie.json';
-import dataImages from '../../mockedData/data-images.json';
-// import Card from '../../components/Card';
+import { useParams } from 'react-router-dom';
+import classNames from 'classnames';
+import Card from '../../components/Card';
 import Paragraph from '../../components/Paragraph';
-import { TypeDataMovie } from '../../components/types';
 import ButtonElem from '../../components/ButtonElem';
+import Loader from '../../components/Loader';
+import CardActor from '../../components/CardActor';
+import { TypeMoviePage } from '../../components/types';
+import { useAppDispatch, useAppSelector } from '../../store/store';
+import { fetchAllDataMovie } from '../../store/reducers/MovieActions';
+import { fetchGenresData } from '../../store/reducers/CardsActions';
+import { getTimeFromMins } from '../../helpers';
+import style from './MoviePage.module.scss';
+import { MAX_IMAGES, MAX_RECOMMENDATIONS } from '../../constants';
 
 function MoviePage() {
-  const { original_title, poster_path, overview, release_date, revenue, runtime, genres } =
-    dataMovie as TypeDataMovie;
   const [isOpenActors, setIsOpenActors] = useState(false);
-  // const actorsClassNames = classNames(style.actors__wrapper, {
-  //   [style.actors__active]: isOpenActors,
-  // });
-
+  const dispatch = useAppDispatch();
+  const { id: movieId } = useParams();
+  const actorsClassNames = classNames(style.actors__wrapper, {
+    [style.actors__active]: isOpenActors,
+  });
   const isOpenActorsCollection = () => {
     setIsOpenActors(() => !isOpenActors);
   };
 
+  const { data, images, recommendations, cast, loading } =
+    useAppSelector((state) => state.movie) || {};
+  const { genresArray } = useAppSelector((state) => state.genres);
+
+  useEffect(() => {
+    dispatch(fetchAllDataMovie(Number(movieId)));
+    if (genresArray.length === 0) dispatch(fetchGenresData());
+  }, [movieId, genresArray.length, dispatch]);
+
+  if (loading) return <Loader />;
+  if (!data) return <div>Do not have data</div>;
+
+  const { poster_path, title, overview, release_date, revenue, runtime, genres } =
+    data as TypeMoviePage;
+
   return (
     <div className={style.container}>
       <div className={style.main}>
-        <img src={poster_path} alt="poster" className={style.photo} data-testid="img" />
+        <img
+          src={`https://image.tmdb.org/t/p/original${poster_path}`}
+          alt="poster"
+          className={style.photo}
+        />
         <div className={style.information}>
           <div>
             <Typography variant="subtitle2" component="span">
               Title:
             </Typography>
             <Typography variant="h4" component="p">
-              {original_title}
+              {title}
             </Typography>
           </div>
-          <Paragraph title="Overview:" content={overview} />
+          {overview && <Paragraph title="Overview:" content={overview} />}
           <Paragraph title="Release date:" content={release_date} />
           <Paragraph title="Revenue:" content={`$ ${revenue}`} />
-          <Paragraph title="Duration:" content={runtime} />
+          {runtime && <Paragraph title="Duration:" content={getTimeFromMins(runtime)} />}
           <div className={style.genre__wrapper}>
-            {genres?.map((genre) => {
+            {genres.map((genre) => {
               return <Chip key={genre.id} label={genre.name} color="success" />;
             })}
           </div>
@@ -57,28 +80,36 @@ function MoviePage() {
                 {isOpenActors ? 'Hide' : 'Show all'}
               </ButtonElem>
             </div>
-            {/* <div className={actorsClassNames}>
-              {dataMovies &&
-                dataMovies.map((movie) => {
-                  return <Card key={movie.id} actorClass {...movie} />;
+            <div className={actorsClassNames}>
+              {cast &&
+                cast.map(({ id, profile_path, name, character }) => {
+                  return (
+                    <CardActor
+                      key={id}
+                      profile_path={profile_path}
+                      name={name}
+                      character={character}
+                    />
+                  );
                 })}
-            </div> */}
+            </div>
           </div>
           <div className={style.text__wrapper}>
             <Typography variant="h6" component="p" sx={{ mb: '10px' }}>
               Images
             </Typography>
             <div className={style.images__container}>
-              {dataImages &&
-                dataImages.map((img) => {
-                  return (
-                    <div
-                      className={style.image}
-                      key={img.id}
-                      style={{ backgroundImage: ` URL(${img.backdrops.file_path})` }}
-                    />
-                  );
-                })}
+              {images?.slice(0, MAX_IMAGES).map((img) => {
+                return (
+                  <div
+                    className={style.image}
+                    key={img.file_path}
+                    style={{
+                      backgroundImage: ` URL(https://image.tmdb.org/t/p/original${img.file_path})`,
+                    }}
+                  />
+                );
+              })}
             </div>
           </div>
         </div>
@@ -87,12 +118,11 @@ function MoviePage() {
         <Typography variant="h3" component="p" sx={{ mb: '15px' }}>
           Recommendations
         </Typography>
-        {/* <div className={style.collection__wrapper}>
-          {dataMovies &&
-            dataMovies.map((movie, i) => {
-              return i < 5 ? <Card key={movie.id} {...movie} /> : null;
-            })}
-        </div> */}
+        <div className={style.collection__wrapper}>
+          {recommendations?.slice(0, MAX_RECOMMENDATIONS).map((movie) => {
+            return <Card key={movie.id} {...movie} />;
+          })}
+        </div>
       </div>
     </div>
   );
