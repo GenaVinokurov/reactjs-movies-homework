@@ -47,7 +47,8 @@
   }
   &__wrapper {
     display: grid;
-    grid-template-columns: repeat(6, 1fr);
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    grid-auto-rows: 270px;
     grid-gap: 10px;
     overflow: hidden;
     height: 270px;
@@ -73,15 +74,10 @@
   }
   .actors {
     &__wrapper {
-      grid-template-columns: repeat(4, 1fr);
-    }
-  }
-}
-@media (max-width: 778px) {
-  .actors {
-    &__wrapper {
       grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
     }
+  }
+  @media (max-width: 778px) {
   }
   .images__container {
     grid-template-columns: repeat(2, 1fr);

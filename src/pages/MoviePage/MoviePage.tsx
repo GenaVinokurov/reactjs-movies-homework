@@ -10,7 +10,6 @@ import CardActor from '../../components/CardActor';
 import { TypeMoviePage } from '../../components/types';
 import { useAppDispatch, useAppSelector } from '../../store/store';
 import { fetchAllDataMovie } from '../../store/reducers/MovieActions';
-import { fetchGenresData } from '../../store/reducers/CardsActions';
 import { getTimeFromMins } from '../../helpers';
 import style from './MoviePage.module.scss';
 import { MAX_IMAGES, MAX_RECOMMENDATIONS } from '../../constants';
@@ -28,12 +27,10 @@ function MoviePage() {
 
   const { data, images, recommendations, cast, loading } =
     useAppSelector((state) => state.movie) || {};
-  const { genresArray } = useAppSelector((state) => state.genres);
 
   useEffect(() => {
     dispatch(fetchAllDataMovie(Number(movieId)));
-    if (genresArray.length === 0) dispatch(fetchGenresData());
-  }, [movieId, genresArray.length, dispatch]);
+  }, [movieId, dispatch]);
 
   if (loading) return <Loader />;
   if (!data) return <div>Do not have data</div>;
@@ -81,17 +78,17 @@ function MoviePage() {
               </ButtonElem>
             </div>
             <div className={actorsClassNames}>
-              {cast &&
-                cast.map(({ id, profile_path, name, character }) => {
-                  return (
-                    <CardActor
-                      key={id}
-                      profile_path={profile_path}
-                      name={name}
-                      character={character}
-                    />
-                  );
-                })}
+              {cast?.map(({ id, profile_path, name, character }) => {
+                return (
+                  <CardActor
+                    key={id}
+                    profile_path={profile_path}
+                    name={name}
+                    character={character}
+                    id={id}
+                  />
+                );
+              })}
             </div>
           </div>
           <div className={style.text__wrapper}>

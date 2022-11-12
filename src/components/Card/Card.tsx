@@ -1,17 +1,23 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Typography } from '@mui/material';
 import classNames from 'classnames';
 import PlayCircleIcon from '@mui/icons-material/PlayCircle';
 import { TypeMovieCard } from '../types';
 import style from './Card.module.scss';
-import { useAppSelector } from '../../store/store';
+import { useAppDispatch, useAppSelector } from '../../store/store';
+import { fetchGenresData } from '../../store/reducers/CardsActions';
 
 function Card(movieData: TypeMovieCard) {
   const { title, vote_average, poster_path, genre_ids, actorClass, id } = movieData;
   const { genresArray } = useAppSelector((state) => state.genres);
+  const dispatch = useAppDispatch();
   const containerClasses = classNames(style.container, { [style.actor__class]: actorClass });
   const imgClasses = classNames(style.img, { [style.actor__img]: actorClass });
+
+  useEffect(() => {
+    if (genresArray.length === 0) dispatch(fetchGenresData());
+  }, [genresArray.length, dispatch]);
 
   return (
     <div className={containerClasses} title="card">
