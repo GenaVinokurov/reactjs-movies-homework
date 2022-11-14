@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { TypeActor, TypeActorImages, TypeMovieCard } from '../../components/types';
-import { fetchActorData, fetchActorFilms, fetchActorImages } from './ActorAction';
+import { fetchActorData, fetchActorFilms, fetchActorImages } from './ActorActions';
 
 interface ActorState {
   data: TypeActor | null;

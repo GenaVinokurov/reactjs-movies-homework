@@ -5,7 +5,7 @@ import style from './ActorPage.module.scss';
 import Card from '../../components/Card';
 import Paragraph from '../../components/Paragraph';
 import { useAppDispatch, useAppSelector } from '../../store/store';
-import { fetchAllDataActor } from '../../store/reducers/ActorAction';
+import { fetchAllDataActor } from '../../store/reducers/ActorActions';
 import Loader from '../../components/Loader/Loader';
 import { MAX_ACTOR_IMAGES } from '../../constants';
 

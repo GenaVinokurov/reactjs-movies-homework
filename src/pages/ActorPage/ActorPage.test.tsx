@@ -1,18 +1,10 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+// import { render, screen } from '@testing-library/react';
 import ActorPage from './ActorPage';
+import renderWithProviders from '../../mockedData/test-utils';
 
 describe('Actor page', () => {
-  // it('exist all data', () => {
-  //   render(<ActorPage />);
-  //   const cards = screen.getAllByTitle('card');
-  //   cards.forEach((el) => {
-  //     expect(el).toBeInTheDocument();
-  //   });
-  // });
-  it('img', () => {
-    render(<ActorPage />);
-    const img = screen.getByAltText('poster') as HTMLImageElement;
-    expect(img).toBeInTheDocument();
+  it('test render actor page', () => {
+    renderWithProviders(<ActorPage />);
   });
 });
