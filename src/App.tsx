@@ -7,6 +7,7 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import ActorPage from './pages/ActorPage';
 import MoviePage from './pages/MoviePage';
+import PageNotFound from './pages/PageNotFound';
 
 function App() {
   return (
@@ -16,8 +17,9 @@ function App() {
         <Routes>
           <Route path="/" element={<Main />} />
           <Route path="/search" element={<Main />} />
-          <Route path="/actor" element={<ActorPage />} />
+          <Route path="/actor/:id" element={<ActorPage />} />
           <Route path="/movie/:id" element={<MoviePage />} />
+          <Route path="*" element={<PageNotFound />} />
         </Routes>
       </Container>
       <Footer />

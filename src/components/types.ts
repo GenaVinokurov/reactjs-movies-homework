@@ -75,3 +75,24 @@ export type TypeMovieCastData = {
 export type TypeMovieCast = {
   cast: TypeMovieCastData;
 };
+
+export type TypeActor = {
+  profile_path: string;
+  name: string;
+  birthday: string;
+  place_of_birth: string;
+  biography: string;
+};
+
+export type TypeActorImages = {
+  file_path: string;
+};
+
+export type TypeActorImagesData = {
+  id: number;
+  profiles: TypeActorImages[];
+};
+
+export type TypeActorFilms = {
+  cast: TypeMovieCard[];
+};

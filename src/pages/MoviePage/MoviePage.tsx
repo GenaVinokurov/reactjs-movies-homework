@@ -7,13 +7,13 @@ import Paragraph from '../../components/Paragraph';
 import ButtonElem from '../../components/ButtonElem';
 import Loader from '../../components/Loader';
 import CardActor from '../../components/CardActor';
-import { TypeMoviePage } from '../../components/types';
+import { TypeMoviePage, TypeMovieCard } from '../../components/types';
 import { useAppDispatch, useAppSelector } from '../../store/store';
 import { fetchAllDataMovie } from '../../store/reducers/MovieActions';
-import { fetchGenresData } from '../../store/reducers/CardsActions';
 import { getTimeFromMins } from '../../helpers';
 import style from './MoviePage.module.scss';
 import { MAX_IMAGES, MAX_RECOMMENDATIONS } from '../../constants';
+import { fetchGenresData } from '../../store/reducers/CardsActions';
 
 function MoviePage() {
   const [isOpenActors, setIsOpenActors] = useState(false);
@@ -25,15 +25,14 @@ function MoviePage() {
   const isOpenActorsCollection = () => {
     setIsOpenActors(() => !isOpenActors);
   };
-
+  const { genresArray } = useAppSelector((state) => state.genres);
   const { data, images, recommendations, cast, loading } =
     useAppSelector((state) => state.movie) || {};
-  const { genresArray } = useAppSelector((state) => state.genres);
 
   useEffect(() => {
+    dispatch(fetchGenresData());
     dispatch(fetchAllDataMovie(Number(movieId)));
-    if (genresArray.length === 0) dispatch(fetchGenresData());
-  }, [movieId, genresArray.length, dispatch]);
+  }, [movieId, dispatch]);
 
   if (loading) return <Loader />;
   if (!data) return <div>Do not have data</div>;
@@ -81,17 +80,17 @@ function MoviePage() {
               </ButtonElem>
             </div>
             <div className={actorsClassNames}>
-              {cast &&
-                cast.map(({ id, profile_path, name, character }) => {
-                  return (
-                    <CardActor
-                      key={id}
-                      profile_path={profile_path}
-                      name={name}
-                      character={character}
-                    />
-                  );
-                })}
+              {cast?.map(({ id, profile_path, name, character }) => {
+                return (
+                  <CardActor
+                    key={id}
+                    profile_path={profile_path}
+                    name={name}
+                    character={character}
+                    id={id}
+                  />
+                );
+              })}
             </div>
           </div>
           <div className={style.text__wrapper}>
@@ -119,9 +118,31 @@ function MoviePage() {
           Recommendations
         </Typography>
         <div className={style.collection__wrapper}>
-          {recommendations?.slice(0, MAX_RECOMMENDATIONS).map((movie) => {
-            return <Card key={movie.id} {...movie} />;
-          })}
+          {recommendations
+            ?.slice(0, MAX_RECOMMENDATIONS)
+            .map(
+              ({
+                title: cardTitle,
+                vote_average,
+                poster_path: path,
+                id,
+                genre_ids,
+              }: TypeMovieCard) => {
+                const genresResult = genre_ids
+                  .map((genreId) => `${genresArray.find((el) => el.id === genreId)?.name} ` || '')
+                  .join('');
+                return (
+                  <Card
+                    key={id}
+                    genres_string={genresResult}
+                    title={cardTitle}
+                    vote_average={vote_average}
+                    poster_path={path}
+                    id={id}
+                  />
+                );
+              }
+            )}
         </div>
       </div>
     </div>

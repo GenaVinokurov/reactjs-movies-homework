@@ -4,12 +4,14 @@ import languageReducer from './reducers/LangSlice';
 import cardsMovieReducer from './reducers/CardsMovieSlice';
 import genresReducer from './reducers/GenresSlice';
 import movieReducer from './reducers/MovieSlice';
+import actorReducer from './reducers/ActorSlice';
 
 export const rootReducer = combineReducers({
   language: languageReducer,
   cardsMovie: cardsMovieReducer,
   genres: genresReducer,
   movie: movieReducer,
+  actor: actorReducer,
 });
 
 export const setupStore = () => {
