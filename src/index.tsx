@@ -20,15 +20,13 @@ const theme = createTheme({
 });
 const store = setupStore();
 root.render(
-  <React.StrictMode>
-    <Provider store={store}>
-      <ErrorBoundary>
-        <ThemeProvider theme={theme}>
-          <BrowserRouter>
-            <App />
-          </BrowserRouter>
-        </ThemeProvider>
-      </ErrorBoundary>
-    </Provider>
-  </React.StrictMode>
+  <Provider store={store}>
+    <ErrorBoundary>
+      <ThemeProvider theme={theme}>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </ThemeProvider>
+    </ErrorBoundary>
+  </Provider>
 );

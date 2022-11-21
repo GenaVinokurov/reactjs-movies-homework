@@ -6,15 +6,19 @@ import Card from '../../components/Card';
 import Paragraph from '../../components/Paragraph';
 import { useAppDispatch, useAppSelector } from '../../store/store';
 import { fetchAllDataActor } from '../../store/reducers/ActorActions';
+import { fetchGenresData } from '../../store/reducers/CardsActions';
 import Loader from '../../components/Loader/Loader';
-import { MAX_ACTOR_IMAGES } from '../../constants';
+import { MAX_ACTOR_FILMS, MAX_ACTOR_IMAGES } from '../../constants';
+import { TypeMovieCard } from '../../components/types';
 
 function ActorPage() {
   const dispatch = useAppDispatch();
   const { id: actorId } = useParams();
   const { data, images, films, loading } = useAppSelector((state) => state.actor);
+  const { genresArray } = useAppSelector((state) => state.genres);
 
   useEffect(() => {
+    dispatch(fetchGenresData());
     dispatch(fetchAllDataActor(Number(actorId)));
   }, [actorId, dispatch]);
 
@@ -46,7 +50,7 @@ function ActorPage() {
               {images?.slice(0, MAX_ACTOR_IMAGES).map((img) => (
                 <img
                   src={`https://image.tmdb.org/t/p/original${img.file_path}`}
-                  alt="another"
+                  alt="actor"
                   className={style.photo}
                   key={img.file_path}
                 />
@@ -60,9 +64,23 @@ function ActorPage() {
           KNOWN BY
         </Typography>
         <div className={style.collection__wrapper}>
-          {films?.slice(0, 10).map((movie) => (
-            <Card key={movie.id} {...movie} />
-          ))}
+          {films
+            ?.slice(0, MAX_ACTOR_FILMS)
+            .map(({ title, vote_average, poster_path, id, genre_ids }: TypeMovieCard) => {
+              const genres = genre_ids
+                .map((genreId) => `${genresArray.find((el) => el.id === genreId)?.name} ` || '')
+                .join('');
+              return (
+                <Card
+                  key={id}
+                  genres_string={genres}
+                  title={title}
+                  vote_average={vote_average}
+                  poster_path={poster_path}
+                  id={id}
+                />
+              );
+            })}
         </div>
       </div>
     </div>

@@ -6,6 +6,7 @@ interface CardsMovieState {
   isLoading: boolean;
   error: string | null;
   sort: string;
+  activeSort: number;
   page: number;
   totalPages: number;
 }
@@ -14,6 +15,7 @@ const initialState: CardsMovieState = {
   isLoading: false,
   error: null,
   sort: 'popular',
+  activeSort: 0,
   page: 1,
   totalPages: 1,
 };
@@ -37,6 +39,9 @@ export const cardsMovieSlice = createSlice({
     },
     changeSort(state, action: PayloadAction<string>) {
       state.sort = action.payload;
+    },
+    changeSortNumber(state, action: PayloadAction<number>) {
+      state.activeSort = action.payload;
     },
     changePage(state, action: PayloadAction<number>) {
       state.page = action.payload;

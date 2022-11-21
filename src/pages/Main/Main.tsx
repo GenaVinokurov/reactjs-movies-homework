@@ -7,18 +7,24 @@ import Loader from '../../components/Loader';
 import { TypeMovieCard } from '../../components/types';
 import { useAppDispatch, useAppSelector } from '../../store/store';
 import { actionsCardsMovie } from '../../store/reducers/CardsMovieSlice';
-import { fetchAllDataCards, fetchSearchData } from '../../store/reducers/CardsActions';
+import {
+  fetchAllDataCards,
+  fetchGenresData,
+  fetchSearchData,
+} from '../../store/reducers/CardsActions';
 import { TOTAL_PAGES_LIMITER } from '../../constants';
 import style from './Main.module.scss';
 
 function Main() {
   const { cards, sort, page, totalPages, isLoading } = useAppSelector((state) => state.cardsMovie);
+  const { genresArray } = useAppSelector((state) => state.genres);
   const { changePage } = actionsCardsMovie;
   const dispatch = useAppDispatch();
   const [searchParams] = useSearchParams();
   const postQuery = searchParams.get('q');
 
   useEffect(() => {
+    dispatch(fetchGenresData());
     if (postQuery) dispatch(fetchSearchData(postQuery));
     else dispatch(fetchAllDataCards(sort, page));
   }, [dispatch, page, sort, postQuery]);
@@ -27,17 +33,34 @@ function Main() {
     dispatch(changePage(value));
   };
 
-  if (isLoading) return <Loader />;
-
   return (
     <main className={style.container}>
       <SortBlock />
-      {cards.length === 0 && <p className={style.empty}> Movies not found</p>}
-      <div className={style.cards__container}>
-        {cards.map((movie: TypeMovieCard) => {
-          return <Card key={movie.id} {...movie} />;
-        })}
-      </div>
+      {isLoading ? (
+        <Loader />
+      ) : (
+        <>
+          {cards.length === 0 && <p className={style.empty}> Movies not found</p>}
+          <div className={style.cards__container}>
+            {cards.map(({ title, vote_average, poster_path, id, genre_ids }: TypeMovieCard) => {
+              const genres = genre_ids
+                .map((genreId) => `${genresArray.find((el) => el.id === genreId)?.name} ` || '')
+                .join('');
+              return (
+                <Card
+                  key={id}
+                  genres_string={genres}
+                  title={title}
+                  vote_average={vote_average}
+                  poster_path={poster_path}
+                  id={id}
+                />
+              );
+            })}
+          </div>
+        </>
+      )}
+
       <div className={style.pagination__wrapper}>
         <Pagination
           count={totalPages < TOTAL_PAGES_LIMITER ? totalPages : TOTAL_PAGES_LIMITER}
