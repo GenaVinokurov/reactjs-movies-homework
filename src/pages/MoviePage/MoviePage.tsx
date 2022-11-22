@@ -28,11 +28,12 @@ function MoviePage() {
   const { genresArray } = useAppSelector((state) => state.genres);
   const { data, images, recommendations, cast, loading } =
     useAppSelector((state) => state.movie) || {};
+  const { lang } = useAppSelector((state) => state.language);
 
   useEffect(() => {
-    dispatch(fetchGenresData());
-    dispatch(fetchAllDataMovie(Number(movieId)));
-  }, [movieId, dispatch]);
+    dispatch(fetchGenresData(lang));
+    dispatch(fetchAllDataMovie(Number(movieId), lang));
+  }, [movieId, dispatch, lang]);
 
   if (loading) return <Loader />;
   if (!data) return <div>Do not have data</div>;

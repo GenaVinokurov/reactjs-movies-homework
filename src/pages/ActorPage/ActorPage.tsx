@@ -16,11 +16,12 @@ function ActorPage() {
   const { id: actorId } = useParams();
   const { data, images, films, loading } = useAppSelector((state) => state.actor);
   const { genresArray } = useAppSelector((state) => state.genres);
+  const { lang } = useAppSelector((state) => state.language);
 
   useEffect(() => {
-    dispatch(fetchGenresData());
-    dispatch(fetchAllDataActor(Number(actorId)));
-  }, [actorId, dispatch]);
+    dispatch(fetchGenresData(lang));
+    dispatch(fetchAllDataActor(Number(actorId), lang));
+  }, [actorId, dispatch, lang]);
 
   if (loading) return <Loader />;
   if (!data) return <div>Do not have data</div>;

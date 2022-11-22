@@ -18,16 +18,17 @@ import style from './Main.module.scss';
 function Main() {
   const { cards, sort, page, totalPages, isLoading } = useAppSelector((state) => state.cardsMovie);
   const { genresArray } = useAppSelector((state) => state.genres);
+  const { lang } = useAppSelector((state) => state.language);
   const { changePage } = actionsCardsMovie;
   const dispatch = useAppDispatch();
   const [searchParams] = useSearchParams();
   const postQuery = searchParams.get('q');
 
   useEffect(() => {
-    dispatch(fetchGenresData());
-    if (postQuery) dispatch(fetchSearchData(postQuery));
-    else dispatch(fetchAllDataCards(sort, page));
-  }, [dispatch, page, sort, postQuery]);
+    dispatch(fetchGenresData(lang));
+    if (postQuery) dispatch(fetchSearchData(postQuery, lang));
+    else dispatch(fetchAllDataCards(sort, page, lang));
+  }, [dispatch, page, sort, postQuery, lang]);
 
   const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
     dispatch(changePage(value));
