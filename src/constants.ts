@@ -1,4 +1,5 @@
 export const SORT_DATA = ['popular', 'top rated', 'upcoming'];
+export const SORT_DATA_RU = ['популярное', 'топ', 'предстоящие'];
 export const SEARCH_DATA = ['popular', 'top_rated', 'upcoming'];
 export const TOTAL_PAGES_LIMITER = 500;
 export const MAX_IMAGES = 8;

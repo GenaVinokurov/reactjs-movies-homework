@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { ButtonGroup } from '@mui/material';
 import classNames from 'classnames';
+import { FormattedMessage } from 'react-intl';
 import { useAppDispatch } from '../../store/store';
 import { actionsCardsMovie } from '../../store/reducers/CardsMovieSlice';
 import ButtonElem from '../ButtonElem';
@@ -25,7 +26,7 @@ function SortBlock() {
             onClick={() => handleChange(i)}
             key={el}
           >
-            {el}
+            <FormattedMessage id={el} />
           </ButtonElem>
         );
       })}

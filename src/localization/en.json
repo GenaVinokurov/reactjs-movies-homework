@@ -1,0 +1,20 @@
+{
+  "h1-movies": "MOVIES",
+  "search": "Search...",
+  "movie-title": "Title:",
+  "movie-overview": "Overview:",
+  "movie-release": "Release date:",
+  "movie-revenue": "Revenue:",
+  "movie-duration": "Duration:",
+  "movie-cast": "Top Billed Cast",
+  "movie-images": "Images:",
+  "movie-recommendations": "Recommendations",
+  "actor-birthday": "Birthday:",
+  "actor-place": "Place of birth:",
+  "actor-biography": "Biography:",
+  "actor-photos": "Photos",
+  "actor-known": "KNOWN BY",
+  "popular": "popular",
+  "top rated": "top rated",
+  "upcoming": "upcoming"
+}

@@ -16,17 +16,13 @@ export const fetchActorData = createAsyncThunk('actor/fetchData', async (arg: Ac
   return data;
 });
 
-export const fetchActorImages = createAsyncThunk(
-  'actor/fetchImages',
-  async (arg: ActorAttributes) => {
-    const { id, lang } = arg;
-    const response = await fetch(
-      `${process.env.REACT_APP_BASE_URL}person/${id}/images?api_key=${process.env.REACT_APP_API_KEY}&language=${lang}`
-    );
-    const data = (await response.json()) as TypeActorImagesData;
-    return data.profiles;
-  }
-);
+export const fetchActorImages = createAsyncThunk('actor/fetchImages', async (id: number) => {
+  const response = await fetch(
+    `${process.env.REACT_APP_BASE_URL}person/${id}/images?api_key=${process.env.REACT_APP_API_KEY}`
+  );
+  const data = (await response.json()) as TypeActorImagesData;
+  return data.profiles;
+});
 
 export const fetchActorFilms = createAsyncThunk(
   'actor/fetchFilms',
@@ -44,7 +40,7 @@ export const fetchAllDataActor = (id: number, lang: string) => async (dispatch: 
   const argObj = { id, lang };
   return Promise.all([
     dispatch(fetchActorData(argObj)),
-    dispatch(fetchActorImages(argObj)),
+    dispatch(fetchActorImages(id)),
     dispatch(fetchActorFilms(argObj)),
   ]);
 };

@@ -16,10 +16,9 @@ export const fetchMovieData = createAsyncThunk('movie/fetchData', async (arg: Mo
   return data;
 });
 
-export const fetchMovieImages = createAsyncThunk('movie/images', async (arg: MovieAttributes) => {
-  const { id, lang } = arg;
+export const fetchMovieImages = createAsyncThunk('movie/images', async (id: number) => {
   const response = await fetch(
-    `${process.env.REACT_APP_BASE_URL}movie/${id}/images?api_key=${process.env.REACT_APP_API_KEY}&language=${lang}`
+    `${process.env.REACT_APP_BASE_URL}movie/${id}/images?api_key=${process.env.REACT_APP_API_KEY}`
   );
   const data = (await response.json()) as TypeMovieImages;
   return data.backdrops;
@@ -50,7 +49,7 @@ export const fetchAllDataMovie = (id: number, lang: string) => async (dispatch: 
   const argObj = { id, lang };
   return Promise.all([
     dispatch(fetchMovieData(argObj)),
-    dispatch(fetchMovieImages(argObj)),
+    dispatch(fetchMovieImages(id)),
     dispatch(fetchMovieRecommendations(argObj)),
     dispatch(fetchMovieCast(argObj)),
   ]);

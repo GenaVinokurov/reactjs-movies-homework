@@ -1,5 +1,6 @@
 import { AppBar, Toolbar, Typography } from '@mui/material';
 import React from 'react';
+import { FormattedMessage } from 'react-intl';
 import { Link } from 'react-router-dom';
 import Search from '../Search';
 import SelectLang from '../SelectLang';
@@ -11,7 +12,7 @@ function Header() {
       <Toolbar className={style.container}>
         <Link to="/">
           <Typography variant="h4" component="h1" className={style.title}>
-            Movies
+            <FormattedMessage id="h1-movies" />
           </Typography>
         </Link>
         <Search />

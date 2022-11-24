@@ -1,0 +1,20 @@
+{
+  "h1-movies": "ФИЛЬМЫ",
+  "search": "Поиск...",
+  "movie-title": "Название:",
+  "movie-overview": "Обзор:",
+  "movie-release": "Дата релиза:",
+  "movie-revenue": "Доход:",
+  "movie-duration": "Продолжительность:",
+  "movie-cast": "Актёрский состав",
+  "movie-images": "Изображения с фильма:",
+  "movie-recommendations": "Рекомендации",
+  "actor-birthday": "День рождения:",
+  "actor-place": "Место рождения:",
+  "actor-biography": "Биография:",
+  "actor-photos": "Фото",
+  "actor-known": "Так же известен в",
+  "popular": "Популярное",
+  "top rated": "В топе",
+  "upcoming": "Скоро выйдет"
+}
