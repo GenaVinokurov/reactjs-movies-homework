@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import { useIntl } from 'react-intl';
 import { Typography } from '@mui/material';
 import style from './ActorPage.module.scss';
 import Card from '../../components/Card';
@@ -16,11 +17,13 @@ function ActorPage() {
   const { id: actorId } = useParams();
   const { data, images, films, loading } = useAppSelector((state) => state.actor);
   const { genresArray } = useAppSelector((state) => state.genres);
+  const { lang } = useAppSelector((state) => state.language);
+  const intl = useIntl();
 
   useEffect(() => {
-    dispatch(fetchGenresData());
-    dispatch(fetchAllDataActor(Number(actorId)));
-  }, [actorId, dispatch]);
+    dispatch(fetchGenresData(lang));
+    dispatch(fetchAllDataActor(Number(actorId), lang));
+  }, [actorId, dispatch, lang]);
 
   if (loading) return <Loader />;
   if (!data) return <div>Do not have data</div>;
@@ -39,12 +42,12 @@ function ActorPage() {
           <Typography variant="h4" component="p" data-testid="name">
             {name}
           </Typography>
-          <Paragraph title="Birthday:" content={birthday} />
-          <Paragraph title="Place of birth:" content={place_of_birth} />
-          <Paragraph title="Biography:" content={biography} />
+          <Paragraph title={intl.formatMessage({ id: 'actor-birthday' })} content={birthday} />
+          <Paragraph title={intl.formatMessage({ id: 'actor-place' })} content={place_of_birth} />
+          <Paragraph title={intl.formatMessage({ id: 'actor-biography' })} content={biography} />
           <div>
-            <Typography variant="h6" component="p" sx={{ mb: '10px' }}>
-              Photos:
+            <Typography variant="h5" component="p" sx={{ mb: '10px' }}>
+              {intl.formatMessage({ id: 'actor-photos' })}
             </Typography>
             <div className={style.photos__container}>
               {images?.slice(0, MAX_ACTOR_IMAGES).map((img) => (
@@ -61,7 +64,7 @@ function ActorPage() {
       </div>
       <div className={style.collection}>
         <Typography variant="h3" component="p" sx={{ mb: '15px' }}>
-          KNOWN BY
+          {intl.formatMessage({ id: 'actor-known' })}
         </Typography>
         <div className={style.collection__wrapper}>
           {films

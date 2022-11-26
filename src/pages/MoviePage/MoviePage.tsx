@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Chip, Typography } from '@mui/material';
 import { useParams } from 'react-router-dom';
+import { FormattedMessage, useIntl } from 'react-intl';
 import classNames from 'classnames';
 import Card from '../../components/Card';
 import Paragraph from '../../components/Paragraph';
@@ -28,11 +29,13 @@ function MoviePage() {
   const { genresArray } = useAppSelector((state) => state.genres);
   const { data, images, recommendations, cast, loading } =
     useAppSelector((state) => state.movie) || {};
+  const { lang } = useAppSelector((state) => state.language);
+  const intl = useIntl();
 
   useEffect(() => {
-    dispatch(fetchGenresData());
-    dispatch(fetchAllDataMovie(Number(movieId)));
-  }, [movieId, dispatch]);
+    dispatch(fetchGenresData(lang));
+    dispatch(fetchAllDataMovie(Number(movieId), lang));
+  }, [movieId, dispatch, lang]);
 
   if (loading) return <Loader />;
   if (!data) return <div>Do not have data</div>;
@@ -51,16 +54,23 @@ function MoviePage() {
         <div className={style.information}>
           <div>
             <Typography variant="subtitle2" component="span">
-              Title:
+              <FormattedMessage id="movie-title" />
             </Typography>
             <Typography variant="h4" component="p">
               {title}
             </Typography>
           </div>
-          {overview && <Paragraph title="Overview:" content={overview} />}
-          <Paragraph title="Release date:" content={release_date} />
-          <Paragraph title="Revenue:" content={`$ ${revenue}`} />
-          {runtime && <Paragraph title="Duration:" content={getTimeFromMins(runtime)} />}
+          {overview && (
+            <Paragraph title={intl.formatMessage({ id: 'movie-overview' })} content={overview} />
+          )}
+          <Paragraph title={intl.formatMessage({ id: 'movie-release' })} content={release_date} />
+          <Paragraph title={intl.formatMessage({ id: 'movie-revenue' })} content={`$ ${revenue}`} />
+          {runtime && (
+            <Paragraph
+              title={intl.formatMessage({ id: 'movie-duration' })}
+              content={getTimeFromMins(runtime)}
+            />
+          )}
           <div className={style.genre__wrapper}>
             {genres.map((genre) => {
               return <Chip key={genre.id} label={genre.name} color="success" />;
@@ -68,8 +78,8 @@ function MoviePage() {
           </div>
           <div className={style.actors__collection}>
             <div className={style.actors__head}>
-              <Typography variant="subtitle2" component="span">
-                Top Billed Cast
+              <Typography variant="h5" component="span">
+                <FormattedMessage id="movie-cast" />
               </Typography>
               <ButtonElem
                 onClick={isOpenActorsCollection}
@@ -95,7 +105,7 @@ function MoviePage() {
           </div>
           <div className={style.text__wrapper}>
             <Typography variant="h6" component="p" sx={{ mb: '10px' }}>
-              Images
+              <FormattedMessage id="movie-images" />
             </Typography>
             <div className={style.images__container}>
               {images?.slice(0, MAX_IMAGES).map((img) => {
@@ -115,7 +125,7 @@ function MoviePage() {
       </div>
       <div className={style.collection}>
         <Typography variant="h3" component="p" sx={{ mb: '15px' }}>
-          Recommendations
+          <FormattedMessage id="movie-recommendations" />
         </Typography>
         <div className={style.collection__wrapper}>
           {recommendations

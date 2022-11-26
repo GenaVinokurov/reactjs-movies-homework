@@ -15,8 +15,8 @@ function SelectLang() {
   };
   return (
     <Select value={lang} onChange={handleChange} className={style.select}>
-      <MenuItem value="En">En</MenuItem>
-      <MenuItem value="Ru">Ru</MenuItem>
+      <MenuItem value="en">En</MenuItem>
+      <MenuItem value="ru">Ru</MenuItem>
     </Select>
   );
 }
