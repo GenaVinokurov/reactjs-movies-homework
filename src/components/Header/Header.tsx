@@ -12,7 +12,7 @@ function Header() {
       <Toolbar className={style.container}>
         <Link to="/">
           <Typography variant="h4" component="h1" className={style.title}>
-            <FormattedMessage id="h1-movies" />
+            <FormattedMessage id="header-movies" />
           </Typography>
         </Link>
         <Search />
