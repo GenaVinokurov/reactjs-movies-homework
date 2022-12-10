@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useEffect, useState } from 'react';
+import React, { ChangeEvent, useEffect, useState, KeyboardEvent } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import { useIntl } from 'react-intl';
 import { IconButton, InputBase, Paper } from '@mui/material';
@@ -8,10 +8,19 @@ function Search() {
   const [searchParams] = useSearchParams();
   const [request, setRequest] = useState('');
   const intl = useIntl();
+  const query = searchParams.get('q');
+
   const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setRequest(e.target.value);
   };
-  const query = searchParams.get('q');
+  const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      e.stopPropagation();
+      handleChange(e);
+    }
+  };
+
   useEffect(() => {
     setRequest(query || '');
   }, [query]);
@@ -26,6 +35,7 @@ function Search() {
         sx={{ ml: 1, flex: 1 }}
         value={request}
         onChange={handleChange}
+        onKeyDown={handleKeyDown}
       />
       <IconButton style={{ width: 45, height: 45 }}>
         <Link to={`/search?q=${request}`}>

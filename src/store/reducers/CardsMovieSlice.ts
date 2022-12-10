@@ -8,6 +8,9 @@ interface CardsMovieState {
   sort: string;
   page: number;
   totalPages: number;
+  isModalOpen: boolean;
+  videoKey: string;
+  errorVideo: string;
 }
 const initialState: CardsMovieState = {
   cards: [],
@@ -16,6 +19,9 @@ const initialState: CardsMovieState = {
   sort: 'popular',
   page: 1,
   totalPages: 1,
+  isModalOpen: false,
+  videoKey: '',
+  errorVideo: '',
 };
 
 export const cardsMovieSlice = createSlice({
@@ -43,6 +49,15 @@ export const cardsMovieSlice = createSlice({
     },
     changeTotalPages(state, action: PayloadAction<number>) {
       state.totalPages = action.payload;
+    },
+    switchIsModalOpen(state, action: PayloadAction<boolean>) {
+      state.isModalOpen = action.payload;
+    },
+    setVideoLinkSuccess(state, action: PayloadAction<string>) {
+      state.videoKey = action.payload;
+    },
+    setVideoLinkError(state, action: PayloadAction<string>) {
+      state.errorVideo = action.payload;
     },
   },
 });

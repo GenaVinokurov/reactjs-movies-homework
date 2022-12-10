@@ -3,6 +3,12 @@ import { AppDispatch } from '../store';
 import { actionsCardsMovie } from './CardsMovieSlice';
 import { actionsGenres } from './GenresSlice';
 
+interface IVideoKey {
+  results: {
+    key: string;
+  }[];
+}
+
 export const fetchCardData =
   (sort: string, page: number, lang: string) => async (dispatch: AppDispatch) => {
     try {
@@ -46,5 +52,18 @@ export const fetchSearchData = (query: string, lang: string) => async (dispatch:
   } catch (error) {
     const { message } = error as Error;
     dispatch(actionsCardsMovie.setCardsMovieError(message));
+  }
+};
+
+export const fetchVideoLink = (id: number) => async (dispatch: AppDispatch) => {
+  try {
+    const response = await fetch(
+      `${process.env.REACT_APP_BASE_URL}movie/${id}/videos?api_key=${process.env.REACT_APP_API_KEY}`
+    );
+    const data = (await response.json()) as IVideoKey;
+    dispatch(actionsCardsMovie.setVideoLinkSuccess(data.results[0].key));
+  } catch (error) {
+    const { message } = error as Error;
+    dispatch(actionsCardsMovie.setVideoLinkError(message));
   }
 };

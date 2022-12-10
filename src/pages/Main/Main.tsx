@@ -14,12 +14,15 @@ import {
 } from '../../store/reducers/CardsActions';
 import { TOTAL_PAGES_LIMITER } from '../../constants';
 import style from './Main.module.scss';
+import MovieVideo from '../../components/MovieVideo';
 
 function Main() {
-  const { cards, sort, page, totalPages, isLoading } = useAppSelector((state) => state.cardsMovie);
+  const { cards, sort, page, totalPages, isLoading, isModalOpen } = useAppSelector(
+    (state) => state.cardsMovie
+  );
   const { genresArray } = useAppSelector((state) => state.genres);
   const { lang } = useAppSelector((state) => state.language);
-  const { changePage } = actionsCardsMovie;
+  const { changePage, switchIsModalOpen } = actionsCardsMovie;
   const dispatch = useAppDispatch();
   const [searchParams] = useSearchParams();
   const postQuery = searchParams.get('q');
@@ -32,6 +35,9 @@ function Main() {
 
   const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
     dispatch(changePage(value));
+  };
+  const handleOpenModal = () => {
+    dispatch(switchIsModalOpen(!isModalOpen));
   };
 
   return (
@@ -71,6 +77,7 @@ function Main() {
           hidePrevButton
         />
       </div>
+      <MovieVideo open={isModalOpen} onClose={handleOpenModal} />
     </main>
   );
 }

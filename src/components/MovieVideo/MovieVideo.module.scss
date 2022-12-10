@@ -1,0 +1,17 @@
+:global(.MuiBackdrop-root.css-i9fmh8-MuiBackdrop-root-MuiModal-backdrop) {
+  z-index: 10;
+}
+.frame {
+  position: relative;
+  width: 60vw;
+  height: 40vw;
+  z-index: 20;
+}
+.not_found {
+  font-size: 48px;
+  color: #888;
+
+  @media (max-width: 599px) {
+    font-size: 40px;
+  }
+}
