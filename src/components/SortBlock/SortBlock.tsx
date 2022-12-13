@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { ButtonGroup } from '@mui/material';
 import classNames from 'classnames';
 import { FormattedMessage } from 'react-intl';
@@ -9,14 +10,27 @@ import style from './SortBlock.module.scss';
 import { SORT_DATA, SEARCH_DATA } from '../../constants';
 
 function SortBlock() {
-  const [activeEl, setActiveEl] = useState(SORT_DATA[0]);
+  const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
   const { changeSort } = actionsCardsMovie;
+  const search = searchParams.has('search');
+  const sort = searchParams.has('sort');
+  const [activeEl, setActiveEl] = useState(() => (search ? '' : SORT_DATA[0]));
   const dispatch = useAppDispatch();
 
   const handleChange = (i: number) => {
     dispatch(changeSort(SEARCH_DATA[i]));
     setActiveEl(SORT_DATA[i]);
+    navigate(`/?sort=${SEARCH_DATA[i]}&page=1`);
   };
+  useEffect(() => {
+    if (search) setActiveEl('');
+    else if (!search && !sort) {
+      dispatch(changeSort(SEARCH_DATA[0]));
+      setActiveEl(SORT_DATA[0]);
+    }
+  }, [search, sort, dispatch, changeSort]);
+
   return (
     <ButtonGroup className={style.container} color="secondary">
       {SORT_DATA.map((el, i) => {

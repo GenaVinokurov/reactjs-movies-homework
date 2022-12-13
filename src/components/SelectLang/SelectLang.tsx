@@ -13,6 +13,7 @@ function SelectLang() {
   const handleChange = (event: SelectChangeEvent) => {
     dispatch(changeLang(event.target.value as string));
   };
+
   return (
     <Select value={lang} onChange={handleChange} className={style.select}>
       <MenuItem value="en">En</MenuItem>

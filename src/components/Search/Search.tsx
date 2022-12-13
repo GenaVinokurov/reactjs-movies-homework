@@ -1,30 +1,30 @@
-import React, { ChangeEvent, useEffect, useState, KeyboardEvent } from 'react';
-import { Link, useSearchParams } from 'react-router-dom';
+import React, { ChangeEvent, KeyboardEvent, useEffect, useState } from 'react';
+import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { useIntl } from 'react-intl';
 import { IconButton, InputBase, Paper } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 
 function Search() {
-  const [searchParams] = useSearchParams();
-  const [request, setRequest] = useState('');
+  const [result, setResult] = useState('');
   const intl = useIntl();
-  const query = searchParams.get('q');
+  const [searchParams] = useSearchParams();
+  const search = searchParams.get('search');
+  const navigate = useNavigate();
 
   const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setRequest(e.target.value);
+    setResult(e.target.value);
   };
   const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
       e.preventDefault();
       e.stopPropagation();
-      handleChange(e);
+      navigate(`/search?search=${result}&page=1`);
     }
   };
 
   useEffect(() => {
-    setRequest(query || '');
-  }, [query]);
-
+    setResult(search || '');
+  }, [search]);
   return (
     <Paper
       component="form"
@@ -33,12 +33,12 @@ function Search() {
       <InputBase
         placeholder={intl.formatMessage({ id: 'search' })}
         sx={{ ml: 1, flex: 1 }}
-        value={request}
+        value={result}
         onChange={handleChange}
         onKeyDown={handleKeyDown}
       />
       <IconButton style={{ width: 45, height: 45 }}>
-        <Link to={`/search?q=${request}`}>
+        <Link to={`/search?search=${result}&page=1`}>
           <SearchIcon color="primary" />
         </Link>
       </IconButton>

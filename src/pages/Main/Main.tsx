@@ -17,24 +17,28 @@ import style from './Main.module.scss';
 import MovieVideo from '../../components/MovieVideo';
 
 function Main() {
-  const { cards, sort, page, totalPages, isLoading, isModalOpen } = useAppSelector(
+  const { cards, sort, totalPages, isLoading, isModalOpen } = useAppSelector(
     (state) => state.cardsMovie
   );
   const { genresArray } = useAppSelector((state) => state.genres);
   const { lang } = useAppSelector((state) => state.language);
-  const { changePage, switchIsModalOpen } = actionsCardsMovie;
+  const { switchIsModalOpen } = actionsCardsMovie;
   const dispatch = useAppDispatch();
-  const [searchParams] = useSearchParams();
-  const postQuery = searchParams.get('q');
+  const [searchParams, setSearchParams] = useSearchParams();
+  const searchQuery = searchParams.get('search') || '';
+  let pageQuery = searchParams.get('page') || '1';
 
   useEffect(() => {
     dispatch(fetchGenresData(lang));
-    if (postQuery) dispatch(fetchSearchData(postQuery, lang));
-    else dispatch(fetchAllDataCards(sort, page, lang));
-  }, [dispatch, page, sort, postQuery, lang]);
+    if (searchQuery) {
+      dispatch(fetchSearchData(searchQuery, pageQuery, lang));
+    } else dispatch(fetchAllDataCards(sort, pageQuery, lang));
+  }, [dispatch, pageQuery, sort, searchQuery, lang]);
 
   const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
-    dispatch(changePage(value));
+    if (searchQuery) setSearchParams({ search: searchQuery, page: value.toString() });
+    else setSearchParams({ sort, page: value.toString() });
+    pageQuery = value.toString();
   };
   const handleOpenModal = () => {
     dispatch(switchIsModalOpen(!isModalOpen));
@@ -42,7 +46,7 @@ function Main() {
 
   return (
     <main className={style.container}>
-      <SortBlock />
+      {!searchQuery && <SortBlock />}
       {isLoading ? (
         <Loader />
       ) : (
@@ -72,6 +76,7 @@ function Main() {
         <Pagination
           count={totalPages < TOTAL_PAGES_LIMITER ? totalPages : TOTAL_PAGES_LIMITER}
           onChange={handleChange}
+          page={+pageQuery}
           color="primary"
           hideNextButton
           hidePrevButton
