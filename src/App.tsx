@@ -1,14 +1,15 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { Container } from '@mui/system';
-import './App.scss';
+import LocalizationProvider from './localization/LocalizationProvider';
 import Main from './pages/Main';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import ActorPage from './pages/ActorPage';
 import MoviePage from './pages/MoviePage';
 import PageNotFound from './pages/PageNotFound';
-import LocalizationProvider from './localization/LocalizationProvider';
+import Trailer from './components/Trailer';
+import './App.scss';
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
         </Container>
         <Footer />
       </div>
+      <Trailer />
     </LocalizationProvider>
   );
 }

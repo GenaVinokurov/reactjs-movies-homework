@@ -4,7 +4,7 @@ import {
   TypeMovieCard,
   TypeMovieImagesData,
   TypeMovieCastData,
-} from '../../components/types';
+} from '../../../components/types';
 import {
   fetchMovieCast,
   fetchMovieData,

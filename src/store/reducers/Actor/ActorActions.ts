@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { AppDispatch } from '../store';
-import { TypeActorFilms, TypeActorImagesData } from '../../components/types';
+import { AppDispatch } from '../../store';
+import { TypeActorFilms, TypeActorImagesData } from '../../../components/types';
 
 interface ActorAttributes {
   id: number;

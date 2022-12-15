@@ -6,37 +6,40 @@ import SortBlock from '../../components/SortBlock';
 import Loader from '../../components/Loader';
 import { TypeMovieCard } from '../../components/types';
 import { useAppDispatch, useAppSelector } from '../../store/store';
-import { actionsCardsMovie } from '../../store/reducers/CardsMovieSlice';
 import {
   fetchAllDataCards,
   fetchGenresData,
   fetchSearchData,
-} from '../../store/reducers/CardsActions';
+} from '../../store/reducers/Cards/CardsActions';
 import { TOTAL_PAGES_LIMITER } from '../../constants';
 import style from './Main.module.scss';
 
 function Main() {
-  const { cards, sort, page, totalPages, isLoading } = useAppSelector((state) => state.cardsMovie);
+  const { cards, sort, totalPages, isLoading } = useAppSelector((state) => state.cardsMovie);
   const { genresArray } = useAppSelector((state) => state.genres);
   const { lang } = useAppSelector((state) => state.language);
-  const { changePage } = actionsCardsMovie;
   const dispatch = useAppDispatch();
-  const [searchParams] = useSearchParams();
-  const postQuery = searchParams.get('q');
+  const [searchParams, setSearchParams] = useSearchParams();
+  const searchQuery = searchParams.get('search') || '';
+  const pageQuery = searchParams.get('page') || '1';
 
   useEffect(() => {
     dispatch(fetchGenresData(lang));
-    if (postQuery) dispatch(fetchSearchData(postQuery, lang));
-    else dispatch(fetchAllDataCards(sort, page, lang));
-  }, [dispatch, page, sort, postQuery, lang]);
+    if (searchQuery) {
+      dispatch(fetchSearchData(searchQuery, pageQuery, lang));
+    } else dispatch(fetchAllDataCards(sort, pageQuery, lang));
+  }, [dispatch, pageQuery, sort, searchQuery, lang]);
 
   const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
-    dispatch(changePage(value));
+    setSearchParams({
+      ...(searchQuery ? { search: searchQuery } : { sort }),
+      page: value.toString(),
+    });
   };
 
   return (
     <main className={style.container}>
-      <SortBlock />
+      {!searchQuery && <SortBlock />}
       {isLoading ? (
         <Loader />
       ) : (
@@ -66,6 +69,7 @@ function Main() {
         <Pagination
           count={totalPages < TOTAL_PAGES_LIMITER ? totalPages : TOTAL_PAGES_LIMITER}
           onChange={handleChange}
+          page={Number(pageQuery)}
           color="primary"
           hideNextButton
           hidePrevButton

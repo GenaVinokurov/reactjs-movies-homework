@@ -2,6 +2,9 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Typography } from '@mui/material';
 import PlayCircleIcon from '@mui/icons-material/PlayCircle';
+import { actionsTrailer } from '../../store/reducers/Trailer/TrailerSlice';
+import { fetchTrailer } from '../../store/reducers/Trailer/TrailerActions';
+import { useAppDispatch } from '../../store/store';
 import style from './Card.module.scss';
 
 export interface ICardProps {
@@ -14,6 +17,13 @@ export interface ICardProps {
 
 function Card(props: ICardProps) {
   const { title, vote_average, poster_path, genres_string, id } = props;
+  const dispatch = useAppDispatch();
+  const { switchIsModalOpen } = actionsTrailer;
+
+  const openModal = () => {
+    dispatch(switchIsModalOpen(true));
+    dispatch(fetchTrailer(id));
+  };
 
   return (
     <div className={style.container} title="card">
@@ -23,11 +33,11 @@ function Card(props: ICardProps) {
         className={style.img}
       >
         <div className={style.substrate}>
-          <a href="*" className={style.link__video}>
+          <button onClick={openModal} type="button" className={style.link__video}>
             <PlayCircleIcon
               sx={{ width: '100px', height: '100px', zIndex: 2, color: 'success.light' }}
             />
-          </a>
+          </button>
         </div>
       </div>
       <Link to={`/movie/${id}`}>
