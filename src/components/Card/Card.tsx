@@ -2,9 +2,9 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Typography } from '@mui/material';
 import PlayCircleIcon from '@mui/icons-material/PlayCircle';
-import { useAppDispatch, useAppSelector } from '../../store/store';
-import { actionsCardsMovie } from '../../store/reducers/CardsMovieSlice';
-import { fetchVideoLink } from '../../store/reducers/CardsActions';
+import { actionsTrailer } from '../../store/reducers/Trailer/TrailerSlice';
+import { fetchTrailer } from '../../store/reducers/Trailer/TrailerActions';
+import { useAppDispatch } from '../../store/store';
 import style from './Card.module.scss';
 
 export interface ICardProps {
@@ -17,13 +17,12 @@ export interface ICardProps {
 
 function Card(props: ICardProps) {
   const { title, vote_average, poster_path, genres_string, id } = props;
-  const { isModalOpen } = useAppSelector((state) => state.cardsMovie);
   const dispatch = useAppDispatch();
-  const { switchIsModalOpen } = actionsCardsMovie;
+  const { switchIsModalOpen } = actionsTrailer;
 
   const openModal = () => {
-    dispatch(switchIsModalOpen(!isModalOpen));
-    dispatch(fetchVideoLink(id));
+    dispatch(switchIsModalOpen(true));
+    dispatch(fetchTrailer(id));
   };
 
   return (

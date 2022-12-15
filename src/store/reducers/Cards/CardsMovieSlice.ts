@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { TypeGetMovie, TypeMovieCard } from '../../components/types';
+import { TypeGetMovie, TypeMovieCard } from '../../../components/types';
 
 interface CardsMovieState {
   cards: TypeMovieCard[];
@@ -7,9 +7,6 @@ interface CardsMovieState {
   error: string | null;
   sort: string;
   totalPages: number;
-  isModalOpen: boolean;
-  videoKey: string;
-  errorVideo: string;
 }
 const initialState: CardsMovieState = {
   cards: [],
@@ -17,9 +14,6 @@ const initialState: CardsMovieState = {
   error: null,
   sort: 'popular',
   totalPages: 1,
-  isModalOpen: false,
-  videoKey: '',
-  errorVideo: '',
 };
 
 export const cardsMovieSlice = createSlice({
@@ -44,15 +38,6 @@ export const cardsMovieSlice = createSlice({
     },
     changeTotalPages(state, action: PayloadAction<number>) {
       state.totalPages = action.payload;
-    },
-    switchIsModalOpen(state, action: PayloadAction<boolean>) {
-      state.isModalOpen = action.payload;
-    },
-    setVideoLinkSuccess(state, action: PayloadAction<string>) {
-      state.videoKey = action.payload;
-    },
-    setVideoLinkError(state, action: PayloadAction<string>) {
-      state.errorVideo = action.payload;
     },
   },
 });

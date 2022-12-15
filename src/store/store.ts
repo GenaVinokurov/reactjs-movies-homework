@@ -1,10 +1,11 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { createSelectorHook, useDispatch, TypedUseSelectorHook } from 'react-redux';
-import languageReducer from './reducers/LangSlice';
-import cardsMovieReducer from './reducers/CardsMovieSlice';
-import genresReducer from './reducers/GenresSlice';
-import movieReducer from './reducers/MovieSlice';
-import actorReducer from './reducers/ActorSlice';
+import languageReducer from './reducers/Language/LangSlice';
+import cardsMovieReducer from './reducers/Cards/CardsMovieSlice';
+import genresReducer from './reducers/Genres/GenresSlice';
+import movieReducer from './reducers/Movie/MovieSlice';
+import actorReducer from './reducers/Actor/ActorSlice';
+import trailerReducer from './reducers/Trailer/TrailerSlice';
 
 export const rootReducer = combineReducers({
   language: languageReducer,
@@ -12,6 +13,7 @@ export const rootReducer = combineReducers({
   genres: genresReducer,
   movie: movieReducer,
   actor: actorReducer,
+  trailer: trailerReducer,
 });
 
 export const setupStore = () => {

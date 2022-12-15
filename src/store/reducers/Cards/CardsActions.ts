@@ -1,13 +1,7 @@
-import { TypeGenres } from '../../components/types';
-import { AppDispatch } from '../store';
+import { TypeGenres } from '../../../components/types';
+import { AppDispatch } from '../../store';
 import { actionsCardsMovie } from './CardsMovieSlice';
-import { actionsGenres } from './GenresSlice';
-
-interface IVideoKey {
-  results: {
-    key: string;
-  }[];
-}
+import { actionsGenres } from '../Genres/GenresSlice';
 
 export const fetchCardData =
   (sort: string, page: string, lang: string) => async (dispatch: AppDispatch) => {
@@ -55,16 +49,3 @@ export const fetchSearchData =
       dispatch(actionsCardsMovie.setCardsMovieError(message));
     }
   };
-
-export const fetchVideoLink = (id: number) => async (dispatch: AppDispatch) => {
-  try {
-    const response = await fetch(
-      `${process.env.REACT_APP_BASE_URL}movie/${id}/videos?api_key=${process.env.REACT_APP_API_KEY}`
-    );
-    const data = (await response.json()) as IVideoKey;
-    dispatch(actionsCardsMovie.setVideoLinkSuccess(data.results[0].key));
-  } catch (error) {
-    const { message } = error as Error;
-    dispatch(actionsCardsMovie.setVideoLinkError(message));
-  }
-};

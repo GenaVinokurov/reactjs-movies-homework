@@ -1,6 +1,10 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { AppDispatch } from '../store';
-import { TypeMovieCast, TypeMovieImages, TypeMovieRecommendations } from '../../components/types';
+import { AppDispatch } from '../../store';
+import {
+  TypeMovieCast,
+  TypeMovieImages,
+  TypeMovieRecommendations,
+} from '../../../components/types';
 
 interface MovieAttributes {
   id: number;

@@ -6,27 +6,22 @@ import SortBlock from '../../components/SortBlock';
 import Loader from '../../components/Loader';
 import { TypeMovieCard } from '../../components/types';
 import { useAppDispatch, useAppSelector } from '../../store/store';
-import { actionsCardsMovie } from '../../store/reducers/CardsMovieSlice';
 import {
   fetchAllDataCards,
   fetchGenresData,
   fetchSearchData,
-} from '../../store/reducers/CardsActions';
+} from '../../store/reducers/Cards/CardsActions';
 import { TOTAL_PAGES_LIMITER } from '../../constants';
 import style from './Main.module.scss';
-import MovieVideo from '../../components/MovieVideo';
 
 function Main() {
-  const { cards, sort, totalPages, isLoading, isModalOpen } = useAppSelector(
-    (state) => state.cardsMovie
-  );
+  const { cards, sort, totalPages, isLoading } = useAppSelector((state) => state.cardsMovie);
   const { genresArray } = useAppSelector((state) => state.genres);
   const { lang } = useAppSelector((state) => state.language);
-  const { switchIsModalOpen } = actionsCardsMovie;
   const dispatch = useAppDispatch();
   const [searchParams, setSearchParams] = useSearchParams();
   const searchQuery = searchParams.get('search') || '';
-  let pageQuery = searchParams.get('page') || '1';
+  const pageQuery = searchParams.get('page') || '1';
 
   useEffect(() => {
     dispatch(fetchGenresData(lang));
@@ -36,12 +31,10 @@ function Main() {
   }, [dispatch, pageQuery, sort, searchQuery, lang]);
 
   const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
-    if (searchQuery) setSearchParams({ search: searchQuery, page: value.toString() });
-    else setSearchParams({ sort, page: value.toString() });
-    pageQuery = value.toString();
-  };
-  const handleOpenModal = () => {
-    dispatch(switchIsModalOpen(!isModalOpen));
+    setSearchParams({
+      ...(searchQuery ? { search: searchQuery } : { sort }),
+      page: value.toString(),
+    });
   };
 
   return (
@@ -76,13 +69,12 @@ function Main() {
         <Pagination
           count={totalPages < TOTAL_PAGES_LIMITER ? totalPages : TOTAL_PAGES_LIMITER}
           onChange={handleChange}
-          page={+pageQuery}
+          page={Number(pageQuery)}
           color="primary"
           hideNextButton
           hidePrevButton
         />
       </div>
-      <MovieVideo open={isModalOpen} onClose={handleOpenModal} />
     </main>
   );
 }

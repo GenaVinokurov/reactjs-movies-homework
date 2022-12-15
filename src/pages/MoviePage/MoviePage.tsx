@@ -10,11 +10,11 @@ import Loader from '../../components/Loader';
 import CardActor from '../../components/CardActor';
 import { TypeMoviePage, TypeMovieCard } from '../../components/types';
 import { useAppDispatch, useAppSelector } from '../../store/store';
-import { fetchAllDataMovie } from '../../store/reducers/MovieActions';
+import { fetchAllDataMovie } from '../../store/reducers/Movie/MovieActions';
 import { getTimeFromMins } from '../../helpers';
 import style from './MoviePage.module.scss';
 import { MAX_IMAGES, MAX_RECOMMENDATIONS } from '../../constants';
-import { fetchGenresData } from '../../store/reducers/CardsActions';
+import { fetchGenresData } from '../../store/reducers/Cards/CardsActions';
 
 function MoviePage() {
   const [isOpenActors, setIsOpenActors] = useState(false);

@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { TypeGenres, TypeArrayGenres } from '../../components/types';
+import { TypeGenres, TypeArrayGenres } from '../../../components/types';
 
 interface GenresState {
   genresArray: TypeArrayGenres;
