@@ -8,5 +8,6 @@ describe('card tests', () => {
   it('card content name exist', () => {
     renderWithProviders(<CardActor {...data} />);
     expect(screen.getByText(/Actor Name/i)).toBeInTheDocument();
+    expect(screen.getByText(/Golym/i)).toBeInTheDocument();
   });
 });

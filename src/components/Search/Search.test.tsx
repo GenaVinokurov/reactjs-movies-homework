@@ -4,7 +4,7 @@ import React from 'react';
 import renderWithProviders from '../../mockedData/test-utils';
 import Search from './Search';
 
-describe('test Search element', () => {
+describe('Search', () => {
   it('change value', () => {
     renderWithProviders(<Search />);
     const search = screen.getByPlaceholderText(/search/i) as HTMLInputElement;
