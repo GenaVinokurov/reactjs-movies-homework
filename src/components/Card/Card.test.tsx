@@ -4,11 +4,12 @@ import userEvent from '@testing-library/user-event';
 import Card, { ICardProps } from './Card';
 import data from '../../mockedData/data-movies.json';
 import renderWithProviders from '../../mockedData/test-utils';
+import { useAppDispatch } from '../../store/store';
 
 jest.mock('../../store/store', () => ({
   __esModule: true,
   ...jest.requireActual('../../store/store'),
-  useAppDispatch: () => jest.fn(),
+  useAppDispatch: jest.fn(),
 }));
 
 describe('Card', () => {
@@ -28,6 +29,8 @@ describe('Card', () => {
     expect(screen.getByText(/historical/i)).toBeInTheDocument();
   });
   it('button test click', () => {
+    const dispatch = jest.fn();
+    (useAppDispatch as jest.Mock).mockReturnValue(dispatch);
     const { title, vote_average, genres_string, poster_path, id } = data[0] as ICardProps;
     renderWithProviders(
       <Card
@@ -39,7 +42,8 @@ describe('Card', () => {
       />
     );
     const button = screen.getByRole('button');
-    userEvent.click(button);
     expect(button).toBeInTheDocument();
+    userEvent.click(button);
+    expect(dispatch).toHaveBeenCalledTimes(2);
   });
 });
