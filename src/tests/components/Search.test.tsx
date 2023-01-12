@@ -2,7 +2,7 @@ import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
 import renderWithProviders from '../../mockedData/test-utils';
-import Search from './Search';
+import Search from '../../components/Search/Search';
 
 describe('Search', () => {
   it('change value', () => {

@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
-import ButtonElem from './ButtonElem';
+import ButtonElem from '../../components/ButtonElem/ButtonElem';
 
 describe('button test', () => {
   it('button', () => {

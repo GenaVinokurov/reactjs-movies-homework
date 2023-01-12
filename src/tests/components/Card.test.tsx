@@ -1,7 +1,7 @@
 import React from 'react';
 import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import Card, { ICardProps } from './Card';
+import Card, { ICardProps } from '../../components/Card/Card';
 import data from '../../mockedData/data-movies.json';
 import renderWithProviders from '../../mockedData/test-utils';
 import { useAppDispatch } from '../../store/store';

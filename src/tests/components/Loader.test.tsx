@@ -1,6 +1,6 @@
 import React from 'react';
 import { screen } from '@testing-library/react';
-import Loader from './Loader';
+import Loader from '../../components/Loader/Loader';
 import renderWithProviders from '../../mockedData/test-utils';
 
 describe('loading tests', () => {

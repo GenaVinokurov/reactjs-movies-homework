@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import Paragraph from './Paragraph';
+import Paragraph from '../../components/Paragraph/Paragraph';
 
 describe('Paragraph', () => {
   it('Content exist', () => {
