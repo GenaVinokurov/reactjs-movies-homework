@@ -1,9 +1,9 @@
-import { act, screen, waitFor } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import { act, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import renderWithProviders from '../../mockedData/test-utils';
 import Search from '../../components/Search/Search';
-import { useNavigate } from 'react-router-dom';
 
 jest.mock('react-router-dom', () => ({
   ...jest.requireActual('react-router-dom'),
