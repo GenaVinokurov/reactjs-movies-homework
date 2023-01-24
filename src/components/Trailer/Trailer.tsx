@@ -22,7 +22,6 @@ function Trailer() {
       open={isModalOpen}
       onClose={onClose}
       sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
-      data-testid="trailer"
     >
       {loading ? (
         <div>

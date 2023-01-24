@@ -1,6 +1,6 @@
 import React from 'react';
 import { screen } from '@testing-library/react';
-import ActorPage from './ActorPage';
+import ActorPage from '../../pages/ActorPage/ActorPage';
 import renderWithProviders from '../../mockedData/test-utils';
 
 jest.mock('../../store/store', () => ({
