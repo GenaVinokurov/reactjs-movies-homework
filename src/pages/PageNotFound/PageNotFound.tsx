@@ -5,7 +5,7 @@ import style from './PageNotFound.module.scss';
 
 function PageNotFound() {
   return (
-    <div className={style.container}>
+    <div className={style.container} title="not found page">
       <Link to="/" className={style.btn}>
         <Button variant="contained" color="success">
           Go to home page

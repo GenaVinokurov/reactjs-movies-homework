@@ -6,9 +6,8 @@ import Loader from '../Loader/Loader';
 import style from './Trailer.module.scss';
 
 function Trailer() {
-  const { key, error, loading } = useAppSelector((state) => state.trailer);
+  const { key, error, loading, isModalOpen } = useAppSelector((state) => state.trailer);
   const dispatch = useAppDispatch();
-  const { isModalOpen } = useAppSelector((state) => state.trailer);
   const { switchIsModalOpen, resetState } = actionsTrailer;
 
   const onClose = () => {
@@ -23,6 +22,7 @@ function Trailer() {
       open={isModalOpen}
       onClose={onClose}
       sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
+      data-testid="trailer"
     >
       {loading ? (
         <div>
