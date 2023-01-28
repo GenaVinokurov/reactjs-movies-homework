@@ -15,6 +15,7 @@ export type TypeButton = {
   variant?: 'text' | 'outlined' | 'contained' | undefined;
   onClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
   id?: string;
+  title?: string;
 };
 export type TypeArrayGenres = {
   id: number;

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { Chip, Typography } from '@mui/material';
 import { useParams } from 'react-router-dom';
 import { FormattedMessage, useIntl } from 'react-intl';
@@ -17,14 +17,14 @@ import { MAX_IMAGES, MAX_RECOMMENDATIONS } from '../../constants';
 import { fetchGenresData } from '../../store/reducers/Cards/CardsActions';
 
 function MoviePage() {
-  const [isOpenActors, setIsOpenActors] = useState(false);
+  const [isOpenActors, setIsOpenActors] = React.useState(false);
   const dispatch = useAppDispatch();
   const { id: movieId } = useParams();
   const actorsClassNames = classNames(style.actors__wrapper, {
     [style.actors__active]: isOpenActors,
   });
   const isOpenActorsCollection = () => {
-    setIsOpenActors(() => !isOpenActors);
+    setIsOpenActors((state) => !state);
   };
   const { genresArray } = useAppSelector((state) => state.genres);
   const { data, images, recommendations, cast, loading } =
@@ -71,7 +71,7 @@ function MoviePage() {
               content={getTimeFromMins(runtime)}
             />
           )}
-          <div className={style.genre__wrapper}>
+          <div className={style.genre__wrapper} title="genres container">
             {genres.map((genre) => {
               return <Chip key={genre.id} label={genre.name} color="success" />;
             })}
@@ -85,6 +85,7 @@ function MoviePage() {
                 onClick={isOpenActorsCollection}
                 buttonClassName={style.actors__btn}
                 variant="contained"
+                title="button open and close all casts"
               >
                 {isOpenActors ? 'Hide' : 'Show all'}
               </ButtonElem>

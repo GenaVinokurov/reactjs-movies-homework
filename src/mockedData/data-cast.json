@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1,
+    "profile_path": "profile1.jpg",
+    "name": "John Snow",
+    "character": "Lead role"
+  },
+  {
+    "id": 2,
+    "profile_path": "profile2.jpg",
+    "name": "John Smith",
+    "character": "Supporting role"
+  },
+  {
+    "id": 3,
+    "profile_path": "profile3.jpg",
+    "name": "Bob Johnson",
+    "character": "Minor role"
+  }
+]

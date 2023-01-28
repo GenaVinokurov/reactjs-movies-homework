@@ -11,6 +11,7 @@ function ButtonElem({
   children,
   onClick,
   id,
+  title,
 }: TypeButton) {
   const btnClass = classNames(style.btn, buttonClassName);
   return (
@@ -21,6 +22,7 @@ function ButtonElem({
       onClick={(e) => onClick(e)}
       id={id}
       variant={variant}
+      title={title}
     >
       {children}
     </Button>
