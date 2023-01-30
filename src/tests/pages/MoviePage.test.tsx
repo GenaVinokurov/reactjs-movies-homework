@@ -1,13 +1,14 @@
 //  @ts-nocheck
-import React from 'react';
+import * as React from 'react';
 import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { useAppSelector } from '../../store/store';
 import renderWithProviders from '../../mockedData/test-utils';
 import MoviePage from '../../pages/MoviePage/MoviePage';
-import { useAppSelector } from '../../store/store';
 import dataMovie from '../../mockedData/data-movie.json';
 import dataRecommendations from '../../mockedData/data-recommendations.json';
 import dataCast from '../../mockedData/data-cast.json';
+import dataImages from '../../mockedData/data-images.json';
 
 jest.mock('../../store/store', () => ({
   __esModule: true,
@@ -23,6 +24,7 @@ describe('MoviePage', () => {
       data: dataMovie,
       cast: dataCast,
       recommendations: dataRecommendations,
+      images: dataImages,
       loading: false,
     });
   });
@@ -76,5 +78,19 @@ describe('MoviePage', () => {
     renderWithProviders(<MoviePage />);
     expect(screen.getByText(/Recommendation Movie 1/i)).toBeInTheDocument();
     expect(screen.getByText(/Recommendation Movie 3/i)).toBeInTheDocument();
+  });
+
+  it('should show images', () => {
+    (useAppSelector as jest.Mock).mockReturnValue({
+      lang: 'en',
+      genresArray: [{ id: 0, name: 'test' }],
+      data: dataMovie,
+      cast: dataCast,
+      recommendations: dataRecommendations,
+      images: dataImages,
+      loading: false,
+    });
+    renderWithProviders(<MoviePage />);
+    expect(screen.getAllByTitle(/movie picture/i)[0]).toBeInTheDocument();
   });
 });

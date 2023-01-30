@@ -48,7 +48,10 @@ function Main() {
           <div className={style.cards__container}>
             {cards.map(({ title, vote_average, poster_path, id, genre_ids }: TypeMovieCard) => {
               const genres = genre_ids
-                .map((genreId) => `${genresArray.find((el) => el.id === genreId)?.name} ` || '')
+                .map((genreId) => {
+                  const genresName = genresArray.find((el) => el.id === genreId)?.name;
+                  return genresName ? `${genresName} ` : '';
+                })
                 .join('');
               return (
                 <Card

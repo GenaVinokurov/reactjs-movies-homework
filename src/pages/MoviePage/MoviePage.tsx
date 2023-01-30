@@ -1,8 +1,9 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Chip, Typography } from '@mui/material';
 import { useParams } from 'react-router-dom';
 import { FormattedMessage, useIntl } from 'react-intl';
 import classNames from 'classnames';
+import { fetchGenresData } from '../../store/reducers/Cards/CardsActions';
 import Card from '../../components/Card';
 import Paragraph from '../../components/Paragraph';
 import ButtonElem from '../../components/ButtonElem';
@@ -14,10 +15,9 @@ import { fetchAllDataMovie } from '../../store/reducers/Movie/MovieActions';
 import { getTimeFromMins } from '../../helpers';
 import style from './MoviePage.module.scss';
 import { MAX_IMAGES, MAX_RECOMMENDATIONS } from '../../constants';
-import { fetchGenresData } from '../../store/reducers/Cards/CardsActions';
 
 function MoviePage() {
-  const [isOpenActors, setIsOpenActors] = React.useState(false);
+  const [isOpenActors, setIsOpenActors] = useState(false);
   const dispatch = useAppDispatch();
   const { id: movieId } = useParams();
   const actorsClassNames = classNames(style.actors__wrapper, {
@@ -114,6 +114,7 @@ function MoviePage() {
                   <div
                     className={style.image}
                     key={img.file_path}
+                    title="movie picture"
                     style={{
                       backgroundImage: ` URL(https://image.tmdb.org/t/p/original${img.file_path})`,
                     }}
@@ -140,7 +141,10 @@ function MoviePage() {
                 genre_ids,
               }: TypeMovieCard) => {
                 const genresResult = genre_ids
-                  .map((genreId) => `${genresArray.find((el) => el.id === genreId)?.name} ` || '')
+                  .map((genreId) => {
+                    const genresName = genresArray.find((el) => el.id === genreId)?.name;
+                    return genresName ? `${genresName} ` : '';
+                  })
                   .join('');
                 return (
                   <Card
