@@ -1,3 +1,4 @@
+//  @ts-nocheck
 import React from 'react';
 import { screen } from '@testing-library/react';
 import { useAppSelector } from '../../store/store';
@@ -13,88 +14,50 @@ jest.mock('../../store/store', () => ({
   useAppSelector: jest.fn(),
 }));
 
+const getUseAppSelectorMock = ({
+  lang = 'en',
+  genresArray = [{ id: 0, name: 'super action' }],
+  loading = false,
+  data = dataActor,
+  images = dataImages,
+  films = dataCards,
+  error = '',
+}) => ({ lang, genresArray, loading, data, images, films, error });
+
 describe('Actor page', () => {
   beforeEach(() => {
-    (useAppSelector as jest.Mock).mockReturnValue({
-      lang: 'en',
-      genresArray: [{ id: 0, name: 'super action' }],
-      loading: false,
-      data: dataActor,
-      images: null,
-      films: dataCards,
-      error: '',
-    });
+    (useAppSelector as jest.Mock).mockReturnValue(getUseAppSelectorMock({}));
   });
   afterEach(() => {
     jest.restoreAllMocks();
   });
   it('should show loader component', () => {
-    (useAppSelector as jest.Mock).mockReturnValue({
-      lang: 'en',
-      loading: true,
-      genresArray: [{ id: 0, name: 'super action' }],
-      data: dataActor,
-      images: null,
-      films: dataCards,
-      error: '',
-    });
+    (useAppSelector as jest.Mock).mockReturnValue(getUseAppSelectorMock({ loading: true }));
     renderWithProviders(<ActorPage />);
     const loader = screen.getByTitle('loader');
     expect(loader).toBeInTheDocument();
   });
   it('should show text "Do not have data"', () => {
-    (useAppSelector as jest.Mock).mockReturnValue({
-      lang: 'en',
-      loading: false,
-      genresArray: [{ id: 0, name: 'super action' }],
-      data: null,
-      images: null,
-      films: null,
-      error: '',
-    });
+    (useAppSelector as jest.Mock).mockReturnValue(
+      getUseAppSelectorMock({ data: null, images: null, films: null })
+    );
     renderWithProviders(<ActorPage />);
     const text = screen.getByText(/Do not have data/i);
     expect(text).toBeInTheDocument();
   });
 
   it('should show genres', () => {
-    (useAppSelector as jest.Mock).mockReturnValue({
-      lang: 'en',
-      loading: false,
-      genresArray: [{ id: 0, name: 'super action' }],
-      data: dataActor,
-      images: null,
-      films: dataCards,
-      error: '',
-    });
     renderWithProviders(<ActorPage />);
     expect(screen.queryByText(/super action/i)).toBeInTheDocument();
   });
 
   it('should do not show genres', () => {
-    (useAppSelector as jest.Mock).mockReturnValue({
-      lang: 'en',
-      loading: false,
-      genresArray: [{}],
-      data: dataActor,
-      images: null,
-      films: dataCards,
-      error: '',
-    });
+    (useAppSelector as jest.Mock).mockReturnValue(getUseAppSelectorMock({ genresArray: [{}] }));
     renderWithProviders(<ActorPage />);
     expect(screen.queryByText(/super action/i)).not.toBeInTheDocument();
   });
 
   it('should show images', () => {
-    (useAppSelector as jest.Mock).mockReturnValue({
-      lang: 'en',
-      loading: false,
-      genresArray: [{ id: 0, name: 'super action' }],
-      data: dataActor,
-      images: dataImages,
-      films: dataCards,
-      error: '',
-    });
     renderWithProviders(<ActorPage />);
     expect(screen.getAllByAltText(/actor/i)[0]).toBeInTheDocument();
   });

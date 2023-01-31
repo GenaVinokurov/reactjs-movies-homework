@@ -12,43 +12,33 @@ jest.mock('../../store/store', () => ({
   __esModule: true,
   ...jest.requireActual('../../store/store'),
   useAppSelector: jest.fn(),
-  useAppDispatch: jest.fn(),
 }));
+
+const getUseAppSelectorMock = ({
+  lang = 'en',
+  genresArray = [{ id: 0, name: 'super action' }],
+  cards = dataCards,
+  sort = 'sort',
+  totalPages = 20000,
+  isLoading = false,
+}) => ({ lang, genresArray, cards, sort, totalPages, isLoading });
 
 describe('Main', () => {
   beforeEach(() => {
-    (useAppSelector as jest.Mock).mockReturnValue({
-      lang: 'en',
-      genresArray: [{ id: 0, name: 'super action' }],
-      cards: dataCards,
-      sort: 'sort',
-      isLoading: false,
-    });
-    const dispatch = jest.fn();
-    (useAppDispatch as jest.Mock).mockReturnValue(dispatch);
+    (useAppSelector as jest.Mock).mockReturnValue(getUseAppSelectorMock({}));
   });
   afterEach(() => {
     jest.restoreAllMocks();
   });
 
   it('should show loader component', () => {
-    (useAppSelector as jest.Mock).mockReturnValue({
-      lang: 'en',
-      genresArray: [{ id: 0, name: 'test' }],
-      cards: [],
-      isLoading: true,
-    });
+    (useAppSelector as jest.Mock).mockReturnValue(getUseAppSelectorMock({ isLoading: true }));
     renderWithProviders(<Main />);
     expect(screen.getByTitle('loader')).toBeInTheDocument();
   });
 
   it('should show text "Movies not found"', () => {
-    (useAppSelector as jest.Mock).mockReturnValue({
-      lang: 'en',
-      genresArray: [{ id: 0, name: 'test' }],
-      cards: [],
-      isLoading: false,
-    });
+    (useAppSelector as jest.Mock).mockReturnValue(getUseAppSelectorMock({ cards: [] }));
     renderWithProviders(<Main />);
     expect(screen.getByText(/Movies not found/i)).toBeInTheDocument();
   });
@@ -87,40 +77,18 @@ describe('Main', () => {
   });
 
   it('pagination total pages do not have default value', () => {
-    (useAppSelector as jest.Mock).mockReturnValue({
-      lang: 'en',
-      genresArray: [{ id: 0, name: 'super action' }],
-      cards: dataCards,
-      sort: 'sort',
-      totalPages: 20,
-      isLoading: false,
-    });
+    (useAppSelector as jest.Mock).mockReturnValue(getUseAppSelectorMock({ totalPages: 20 }));
     renderWithProviders(<Main />);
     expect(screen.getByLabelText(/go to page 20/i)).toBeInTheDocument();
   });
 
   it('should show genres', () => {
-    (useAppSelector as jest.Mock).mockReturnValue({
-      lang: 'en',
-      genresArray: [{ id: 0, name: 'super action' }],
-      cards: dataCards,
-      sort: 'sort',
-      totalPages: 20,
-      isLoading: false,
-    });
     renderWithProviders(<Main />);
     expect(screen.queryByText(/super action/i)).toBeInTheDocument();
   });
 
   it('should do not show genres', () => {
-    (useAppSelector as jest.Mock).mockReturnValue({
-      lang: 'en',
-      genresArray: [{}],
-      cards: dataCards,
-      sort: 'sort',
-      totalPages: 20,
-      isLoading: false,
-    });
+    (useAppSelector as jest.Mock).mockReturnValue(getUseAppSelectorMock({ genresArray: [] }));
     renderWithProviders(<Main />);
     expect(screen.queryByText(/super action/i)).not.toBeInTheDocument();
   });

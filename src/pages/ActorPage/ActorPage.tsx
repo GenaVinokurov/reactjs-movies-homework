@@ -7,10 +7,11 @@ import Card from '../../components/Card';
 import Paragraph from '../../components/Paragraph';
 import { useAppDispatch, useAppSelector } from '../../store/store';
 import { fetchAllDataActor } from '../../store/reducers/Actor/ActorActions';
-import { fetchGenresData } from '../../store/reducers/Cards/CardsActions';
+import { fetchGenresData } from '../../store/reducers/Genres/GenresActions';
 import Loader from '../../components/Loader/Loader';
 import { MAX_ACTOR_FILMS, MAX_ACTOR_IMAGES } from '../../constants';
 import { TypeMovieCard } from '../../components/types';
+import { convertGenresToString } from '../../helpers';
 
 function ActorPage() {
   const dispatch = useAppDispatch();
@@ -70,12 +71,7 @@ function ActorPage() {
           {films
             ?.slice(0, MAX_ACTOR_FILMS)
             .map(({ title, vote_average, poster_path, id, genre_ids }: TypeMovieCard) => {
-              const genres = genre_ids
-                .map((genreId) => {
-                  const genresName = genresArray.find((el) => el.id === genreId)?.name;
-                  return genresName ? `${genresName} ` : '';
-                })
-                .join('');
+              const genres = convertGenresToString(genre_ids, genresArray);
               return (
                 <Card
                   key={id}

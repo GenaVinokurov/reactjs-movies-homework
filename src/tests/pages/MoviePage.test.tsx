@@ -16,17 +16,19 @@ jest.mock('../../store/store', () => ({
   useAppSelector: jest.fn(),
 }));
 
+const getUseAppSelectorMock = ({
+  lang = 'en',
+  genresArray = [{ id: 0, name: 'test' }],
+  data = dataMovie,
+  cast = dataCast,
+  recommendations = dataRecommendations,
+  images = dataImages,
+  loading = false,
+}) => ({ lang, genresArray, data, cast, recommendations, images, loading });
+
 describe('MoviePage', () => {
   beforeEach(() => {
-    (useAppSelector as jest.Mock).mockReturnValue({
-      lang: 'en',
-      genresArray: [{ id: 0, name: 'test' }],
-      data: dataMovie,
-      cast: dataCast,
-      recommendations: dataRecommendations,
-      images: dataImages,
-      loading: false,
-    });
+    (useAppSelector as jest.Mock).mockReturnValue(getUseAppSelectorMock({}));
   });
   afterEach(() => {
     jest.restoreAllMocks();
@@ -42,23 +44,13 @@ describe('MoviePage', () => {
   });
 
   it('should show loader component', () => {
-    (useAppSelector as jest.Mock).mockReturnValue({
-      lang: 'en',
-      genresArray: [{ id: 0, name: 'test' }],
-      data: dataMovie,
-      loading: true,
-    });
+    (useAppSelector as jest.Mock).mockReturnValue(getUseAppSelectorMock({ loading: true }));
     renderWithProviders(<MoviePage />);
     expect(screen.getByTitle('loader')).toBeInTheDocument();
   });
 
   it('should notify about missing data', () => {
-    (useAppSelector as jest.Mock).mockReturnValue({
-      lang: 'en',
-      genresArray: [{ id: 0, name: 'test' }],
-      data: null,
-      loading: false,
-    });
+    (useAppSelector as jest.Mock).mockReturnValue(getUseAppSelectorMock({ data: null }));
     renderWithProviders(<MoviePage />);
     expect(screen.getByText(/Do not have data/i)).toBeInTheDocument();
   });
@@ -81,15 +73,6 @@ describe('MoviePage', () => {
   });
 
   it('should show images', () => {
-    (useAppSelector as jest.Mock).mockReturnValue({
-      lang: 'en',
-      genresArray: [{ id: 0, name: 'test' }],
-      data: dataMovie,
-      cast: dataCast,
-      recommendations: dataRecommendations,
-      images: dataImages,
-      loading: false,
-    });
     renderWithProviders(<MoviePage />);
     expect(screen.getAllByTitle(/movie picture/i)[0]).toBeInTheDocument();
   });

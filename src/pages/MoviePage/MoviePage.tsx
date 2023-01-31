@@ -3,7 +3,7 @@ import { Chip, Typography } from '@mui/material';
 import { useParams } from 'react-router-dom';
 import { FormattedMessage, useIntl } from 'react-intl';
 import classNames from 'classnames';
-import { fetchGenresData } from '../../store/reducers/Cards/CardsActions';
+import { fetchGenresData } from '../../store/reducers/Genres/GenresActions';
 import Card from '../../components/Card';
 import Paragraph from '../../components/Paragraph';
 import ButtonElem from '../../components/ButtonElem';
@@ -12,7 +12,7 @@ import CardActor from '../../components/CardActor';
 import { TypeMoviePage, TypeMovieCard } from '../../components/types';
 import { useAppDispatch, useAppSelector } from '../../store/store';
 import { fetchAllDataMovie } from '../../store/reducers/Movie/MovieActions';
-import { getTimeFromMins } from '../../helpers';
+import { convertGenresToString, getTimeFromMins } from '../../helpers';
 import style from './MoviePage.module.scss';
 import { MAX_IMAGES, MAX_RECOMMENDATIONS } from '../../constants';
 
@@ -140,12 +140,7 @@ function MoviePage() {
                 id,
                 genre_ids,
               }: TypeMovieCard) => {
-                const genresResult = genre_ids
-                  .map((genreId) => {
-                    const genresName = genresArray.find((el) => el.id === genreId)?.name;
-                    return genresName ? `${genresName} ` : '';
-                  })
-                  .join('');
+                const genresResult = convertGenresToString(genre_ids, genresArray);
                 return (
                   <Card
                     key={id}
