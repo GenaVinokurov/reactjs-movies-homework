@@ -4,7 +4,7 @@ import * as ReactRouterDom from 'react-router-dom';
 import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import Main from '../../pages/Main/Main';
-import { useAppSelector, useAppDispatch } from '../../store/store';
+import { useAppSelector } from '../../store/store';
 import renderWithProviders from '../../mockedData/test-utils';
 import dataCards from '../../mockedData/data-movies.json';
 
