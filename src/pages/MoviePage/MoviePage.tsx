@@ -3,6 +3,7 @@ import { Chip, Typography } from '@mui/material';
 import { useParams } from 'react-router-dom';
 import { FormattedMessage, useIntl } from 'react-intl';
 import classNames from 'classnames';
+import { fetchGenresData } from '../../store/reducers/Genres/GenresActions';
 import Card from '../../components/Card';
 import Paragraph from '../../components/Paragraph';
 import ButtonElem from '../../components/ButtonElem';
@@ -11,10 +12,9 @@ import CardActor from '../../components/CardActor';
 import { TypeMoviePage, TypeMovieCard } from '../../components/types';
 import { useAppDispatch, useAppSelector } from '../../store/store';
 import { fetchAllDataMovie } from '../../store/reducers/Movie/MovieActions';
-import { getTimeFromMins } from '../../helpers';
+import { convertGenresToString, getTimeFromMins } from '../../helpers';
 import style from './MoviePage.module.scss';
 import { MAX_IMAGES, MAX_RECOMMENDATIONS } from '../../constants';
-import { fetchGenresData } from '../../store/reducers/Cards/CardsActions';
 
 function MoviePage() {
   const [isOpenActors, setIsOpenActors] = useState(false);
@@ -24,7 +24,7 @@ function MoviePage() {
     [style.actors__active]: isOpenActors,
   });
   const isOpenActorsCollection = () => {
-    setIsOpenActors(() => !isOpenActors);
+    setIsOpenActors((state) => !state);
   };
   const { genresArray } = useAppSelector((state) => state.genres);
   const { data, images, recommendations, cast, loading } =
@@ -71,7 +71,7 @@ function MoviePage() {
               content={getTimeFromMins(runtime)}
             />
           )}
-          <div className={style.genre__wrapper}>
+          <div className={style.genre__wrapper} title="genres container">
             {genres.map((genre) => {
               return <Chip key={genre.id} label={genre.name} color="success" />;
             })}
@@ -85,6 +85,7 @@ function MoviePage() {
                 onClick={isOpenActorsCollection}
                 buttonClassName={style.actors__btn}
                 variant="contained"
+                title="button open and close all casts"
               >
                 {isOpenActors ? 'Hide' : 'Show all'}
               </ButtonElem>
@@ -113,6 +114,7 @@ function MoviePage() {
                   <div
                     className={style.image}
                     key={img.file_path}
+                    title="movie picture"
                     style={{
                       backgroundImage: ` URL(https://image.tmdb.org/t/p/original${img.file_path})`,
                     }}
@@ -138,9 +140,7 @@ function MoviePage() {
                 id,
                 genre_ids,
               }: TypeMovieCard) => {
-                const genresResult = genre_ids
-                  .map((genreId) => `${genresArray.find((el) => el.id === genreId)?.name} ` || '')
-                  .join('');
+                const genresResult = convertGenresToString(genre_ids, genresArray);
                 return (
                   <Card
                     key={id}

@@ -1,0 +1,23 @@
+[
+  {
+    "title": "Recommendation Movie 1",
+    "vote_average": 8.5,
+    "poster_path": "https://via.placeholder.com/300.png/09f/fff",
+    "id": 123,
+    "genre_ids": [0, 12]
+  },
+  {
+    "title": "Recommendation Movie 2",
+    "vote_average": 7.0,
+    "poster_path": "https://via.placeholder.com/300.png/09f/fff",
+    "id": 456,
+    "genre_ids": [1, 0]
+  },
+  {
+    "title": "Recommendation Movie 3",
+    "vote_average": 9.0,
+    "poster_path": "https://via.placeholder.com/300.png/09f/fff",
+    "id": 789,
+    "genre_ids": [0, 1]
+  }
+]

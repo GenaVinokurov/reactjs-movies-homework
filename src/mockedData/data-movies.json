@@ -4,6 +4,7 @@
     "vote_average": 8.8,
     "poster_path": "https://via.placeholder.com/300.png/09f/fff",
     "genres_string": "historical",
+    "genre_ids": [0],
     "id": 0
   },
   {
@@ -11,6 +12,7 @@
     "vote_average": 5.2,
     "poster_path": "https://via.placeholder.com/300.png/09f/fff",
     "genres_string": "historical",
+    "genre_ids": [1],
     "id": 1
   },
   {
@@ -18,69 +20,7 @@
     "vote_average": 8.8,
     "poster_path": "https://via.placeholder.com/300.png/09f/fff",
     "genres_string": "historical",
+    "genre_ids": [2],
     "id": 2
-  },
-  {
-    "title": "Second film with long title",
-    "vote_average": 5.2,
-    "poster_path": "https://via.placeholder.com/300.png/09f/fff",
-    "genres_string": "historical",
-    "id": 3
-  },
-  {
-    "title": "First film",
-    "vote_average": 8.8,
-    "poster_path": "https://via.placeholder.com/300.png/09f/fff",
-    "genres_string": "historical",
-    "id": 4
-  },
-  {
-    "title": "Second film with long title",
-    "vote_average": 5.2,
-    "poster_path": "https://via.placeholder.com/300.png/09f/fff",
-    "genres_string": "historical",
-    "id": 5
-  },
-  {
-    "title": "First film",
-    "vote_average": 8.8,
-    "poster_path": "https://via.placeholder.com/300.png/09f/fff",
-    "genres_string": "historical",
-    "id": 6
-  },
-  {
-    "title": "Second film with long title",
-    "vote_average": 5.2,
-    "poster_path": "https://via.placeholder.com/300.png/09f/fff",
-    "genres_string": "historical",
-    "id": 7
-  },
-  {
-    "title": "First film",
-    "vote_average": 8.8,
-    "poster_path": "https://via.placeholder.com/300.png/09f/fff",
-    "genres_string": "historical",
-    "id": 8
-  },
-  {
-    "title": "Second film with long title",
-    "vote_average": 5.2,
-    "poster_path": "https://via.placeholder.com/300.png/09f/fff",
-    "genres_string": "historical",
-    "id": 9
-  },
-  {
-    "title": "First film",
-    "vote_average": 8.8,
-    "poster_path": "https://via.placeholder.com/300.png/09f/fff",
-    "genres_string": "historical",
-    "id": 10
-  },
-  {
-    "title": "Second film with long title",
-    "vote_average": 5.2,
-    "poster_path": "https://via.placeholder.com/300.png/09f/fff",
-    "genres_string": "historical",
-    "id": 11
   }
 ]

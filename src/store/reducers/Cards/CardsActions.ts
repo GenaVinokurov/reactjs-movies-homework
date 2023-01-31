@@ -1,7 +1,6 @@
-import { TypeGenres } from '../../../components/types';
 import { AppDispatch } from '../../store';
 import { actionsCardsMovie } from './CardsMovieSlice';
-import { actionsGenres } from '../Genres/GenresSlice';
+import { fetchGenresData } from '../Genres/GenresActions';
 
 export const fetchCardData =
   (sort: string, page: string, lang: string) => async (dispatch: AppDispatch) => {
@@ -17,19 +16,6 @@ export const fetchCardData =
       dispatch(actionsCardsMovie.setCardsMovieError(message));
     }
   };
-export const fetchGenresData = (lang: string) => async (dispatch: AppDispatch) => {
-  try {
-    dispatch(actionsGenres.setGenresLoading());
-    const response = await fetch(
-      `${process.env.REACT_APP_BASE_URL}genre/movie/list?api_key=${process.env.REACT_APP_API_KEY}&language=${lang}`
-    );
-    const data = (await response.json()) as TypeGenres;
-    dispatch(actionsGenres.setGenresSuccess(data));
-  } catch (error) {
-    const { message } = error as Error;
-    dispatch(actionsGenres.setGenresError(message));
-  }
-};
 
 export const fetchAllDataCards =
   (sort: string, page: string, lang: string) => async (dispatch: AppDispatch) =>

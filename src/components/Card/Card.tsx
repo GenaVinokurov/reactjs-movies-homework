@@ -45,7 +45,7 @@ function Card(props: ICardProps) {
           {title}
         </Typography>
       </Link>
-      <Typography component="span" className={style.text}>
+      <Typography component="span" className={style.text} title="genres">
         {genres_string}
       </Typography>
     </div>

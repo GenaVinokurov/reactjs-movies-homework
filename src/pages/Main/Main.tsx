@@ -6,13 +6,11 @@ import SortBlock from '../../components/SortBlock';
 import Loader from '../../components/Loader';
 import { TypeMovieCard } from '../../components/types';
 import { useAppDispatch, useAppSelector } from '../../store/store';
-import {
-  fetchAllDataCards,
-  fetchGenresData,
-  fetchSearchData,
-} from '../../store/reducers/Cards/CardsActions';
+import { fetchAllDataCards, fetchSearchData } from '../../store/reducers/Cards/CardsActions';
 import { TOTAL_PAGES_LIMITER } from '../../constants';
 import style from './Main.module.scss';
+import { convertGenresToString } from '../../helpers';
+import { fetchGenresData } from '../../store/reducers/Genres/GenresActions';
 
 function Main() {
   const { cards, sort, totalPages, isLoading } = useAppSelector((state) => state.cardsMovie);
@@ -47,9 +45,7 @@ function Main() {
           {cards.length === 0 && <p className={style.empty}> Movies not found</p>}
           <div className={style.cards__container}>
             {cards.map(({ title, vote_average, poster_path, id, genre_ids }: TypeMovieCard) => {
-              const genres = genre_ids
-                .map((genreId) => `${genresArray.find((el) => el.id === genreId)?.name} ` || '')
-                .join('');
+              const genres = convertGenresToString(genre_ids, genresArray);
               return (
                 <Card
                   key={id}
